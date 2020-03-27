@@ -1,0 +1,18 @@
+This Mod adds 3 Widgets. The Position and Visibility of each Widget can be changed in the Config.
+
+[i:2177] [c/ffff00:Current Ammo]
+
+Shows your held weapon's ammo's sprite, name, amount and rarity. Only visible when the weapon has ammo.
+
+- follows the player. Can be turned off in the Config.
+- Change its size in the Config.
+
+[i:493] [c/ffff00:Flight Time Bar]
+
+Shows a bar showing how much flight time you have left. Only visible when in flight.
+
+- Follows the player. Can be turned off in the Config.
+
+[i:2999] [c/ffff00:Minion Utilization]
+
+Shows your current as well as your maximum amount of minions. No more spamming your summon weapon to make sure you have enough minions.

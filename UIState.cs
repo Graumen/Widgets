@@ -1,0 +1,1 @@
+﻿namespace Widgets { class UIState : Terraria.UI.UIState { public override void OnInitialize() => Append(new FlightTimeBar()); } }

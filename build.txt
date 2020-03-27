@@ -1,0 +1,3 @@
+displayName = Widgets
+author = Graumen
+version = 1.0
