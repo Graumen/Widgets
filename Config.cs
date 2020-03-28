@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Xna.Framework;
+using System.ComponentModel;
 using Terraria.ModLoader.Config;
 namespace Widgets
 {
@@ -13,6 +14,10 @@ namespace Widgets
         [DefaultValue(true)]
         [Label("Follow Player")]
         public bool caf;
+
+        [DefaultValue(typeof(Color), "44,57,106,179")]
+        [Label("Color")]
+        public Color cac;
 
         [DefaultValue(44)]
         [Label("Height")]

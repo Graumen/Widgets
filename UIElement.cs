@@ -1,13 +1,11 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using static Terraria.ModLoader.ModContent;
-using Terraria.UI;
 using Terraria;
 namespace Widgets
 {
-    class FlightTimeBar : UIElement
+    class FlightTimeBar : Terraria.UI.UIElement
     {
-        protected override void DrawSelf(SpriteBatch spriteBatch)
+        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
             var ci = GetInstance<Config>();
             var lp = Main.LocalPlayer;

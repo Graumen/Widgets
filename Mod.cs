@@ -1,6 +1,4 @@
 using Microsoft.Xna.Framework;
-using static Terraria.ModLoader.ModContent;
-using System.Collections.Generic;
 using System;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -10,8 +8,10 @@ namespace Widgets
 {
     class Mod0 : Mod
     {
-        static Item ca = new Item();
-        UserInterface ftb = new UserInterface();
+        Item ca = new Item();
+        static Config ci = ModContent.GetInstance<Config>();
+        static Player lp = Main.LocalPlayer;
+        UserInterface ft = new UserInterface();
         Color Rarity(int a)
         {
             switch (a)
@@ -47,14 +47,12 @@ namespace Widgets
         }
         public override void Load()
         {
-            ftb.SetState(new UIState());
+            ft.SetState(new UIState());
             new UIState().Activate();
         }
-        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        public override void ModifyInterfaceLayers(System.Collections.Generic.List<GameInterfaceLayer> layers)
         {
-            var ci = GetInstance<Config>();
             var it = Main.itemTexture[ca.type];
-            var lp = Main.LocalPlayer;
             var min = 1 > Math.Min((float)ci.cah / it.Height, (float)ci.caw / it.Width) / 1.375f ? Math.Min((float)ci.cah / it.Height, (float)ci.caw / it.Width) / 1.375f : 1;
             var mti = layers.FindIndex(a => a.Name == "Vanilla: Mouse Text");
             var pp = (ci.caf ? 1 : 0) * (lp.Top - Main.screenPosition + new Vector2(0, lp.gfxOffY));
@@ -88,13 +86,13 @@ namespace Widgets
                     && 0 != lp.velocity.Y
                     && 0 < lp.wingTime
                     && 0 == lp.jump
-                    && ci.ftv) { ftb.Draw(sb, new GameTime()); }
+                    && ci.ftv) { ft.Draw(sb, new GameTime()); }
                    if (!lp.dead
                     && 0 < lp.HeldItem.useAmmo
                     && ci.cav
                     && lp.HasAmmo(lp.HeldItem, true))
                    {
-                       Utils.DrawInvBG(sb, new Rectangle((int)pp.X + ci.cax, (int)pp.Y + ci.cay, ci.caw, ci.cah));
+                       if (0 < ci.cac.A) { Utils.DrawInvBG(sb, new Rectangle((int)pp.X + ci.cax, (int)pp.Y + ci.cay, ci.caw, ci.cah), ci.cac); }
                        sb.Draw(it, new Rectangle((int)Math.Round((ci.caw - it.Width * min) / 2 + ci.cax) + (int)pp.X, (int)Math.Round((ci.cah - it.Height * min) / 2 + ci.cay) + (int)pp.Y, (int)Math.Round(it.Width * min), (int)Math.Round(it.Height * min)), Color.White);
                        Utils.DrawBorderString(sb, ca.Name + (1 < ca.stack ? "\n" + ca.stack : ""), new Vector2((int)pp.X + 10 + ci.caw + ci.cax, (int)pp.Y + ci.cay), Rarity(ca.rare));
                    }
@@ -110,14 +108,12 @@ namespace Widgets
         }
         public override void UpdateUI(GameTime gameTime)
         {
-            var lp = Main.LocalPlayer;
-
             if (-1 == lp.grappling[0]
              && !lp.dead
              && 0 != lp.velocity.Y
              && 0 < lp.wingTime
              && 0 == lp.jump
-             && GetInstance<Config>().ftv) { ftb?.Update(gameTime); }
+             && ci.ftv) { ft?.Update(gameTime); }
         }
     }
 }
