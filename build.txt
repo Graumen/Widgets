@@ -1,0 +1,5 @@
+author = Graumen
+displayName = Widgets
+homepage = https://forums.terraria.org/index.php?threads/widgets.86857/
+includeSource = true
+version = 1.12.4.2
