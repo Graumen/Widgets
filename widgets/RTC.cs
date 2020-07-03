@@ -4,17 +4,17 @@ namespace Widgets
 {
     class RTC : Widget
     {
-        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch a0)
+        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
-            var f0 = Terraria.ModLoader.ModContent.GetInstance<Config>();
-            var f1 = f0.f52;
-            var f2 = Main.fontMouseText.MeasureString(System.DateTime.Now.ToString(f0.f51));
+            var ci = Terraria.ModLoader.ModContent.GetInstance<Config>();
+            var bc = ci.rtcbc;
+            var ms = Main.fontMouseText.MeasureString(System.DateTime.Now.ToString(ci.rtcfm));
 
-            Height.Set(f2.Y, 0);
-            if (0 < f1.A) Utils.DrawInvBG(a0, new Rectangle((int)f8.X, (int)f8.Y, (int)f2.X + 16, (int)f2.Y), new Color(f1.R * f1.A / 255, f1.G * f1.A / 255, f1.B * f1.A / 255, f1.A));
-            Utils.DrawBorderString(a0, System.DateTime.Now.ToString(f0.f51), new Vector2(8 + f8.X, 4 + f8.Y), f0.f53);
-            base.DrawSelf(a0);
-            Width.Set(f2.X + 16, 0);
+            Height.Set(ms.Y, 0);
+            if (0 < bc.A) Utils.DrawInvBG(sb, new Rectangle((int)tp.X, (int)tp.Y, (int)ms.X + 16, (int)ms.Y), new Color(bc.R * bc.A / 255, bc.G * bc.A / 255, bc.B * bc.A / 255, bc.A));
+            Utils.DrawBorderString(sb, System.DateTime.Now.ToString(ci.rtcfm), new Vector2(8 + tp.X, 4 + tp.Y), ci.rtctc);
+            base.DrawSelf(sb);
+            Width.Set(ms.X + 16, 0);
         }
     }
 }

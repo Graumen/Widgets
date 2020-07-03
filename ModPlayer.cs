@@ -3,17 +3,17 @@ namespace Widgets
 {
     class ModPlayer : Terraria.ModLoader.ModPlayer
     {
-        public static bool f0, f1;
-        public static int f2, f3, f4;
-        public override void OnHitByNPC(NPC a0, int a1, bool a2) => f4 = Main.LocalPlayer.immuneTime;
-        public override void OnHitByProjectile(Projectile a0, int a1, bool a2) => f4 = Main.LocalPlayer.immuneTime;
-        public override void ProcessTriggers(Terraria.GameInput.TriggersSet a0)
+        public static bool br, pm;
+        public static int bd, blink, it;
+        public override void OnHitByNPC(NPC _, int a, bool b) => it = Main.LocalPlayer.immuneTime;
+        public override void OnHitByProjectile(Projectile _, int a, bool b) => it = Main.LocalPlayer.immuneTime;
+        public override void ProcessTriggers(Terraria.GameInput.TriggersSet _)
         {
-            if (Mod0.f9.JustPressed)
+            if (Mod0.hk.JustPressed)
             {
-                f2 = 0;
-                Main.NewText("Positioning Mode " + (f1 ? "[c/ff0000:Off]" : "[c/00ff00:On]"));
-                f1 = !f1;
+                blink = 0;
+                Main.NewText("Positioning Mode " + (pm ? "[c/ff0000:Off]" : "[c/00ff00:On]"));
+                pm = !pm;
             }
         }
     }

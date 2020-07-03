@@ -5,15 +5,15 @@ namespace Widgets
 {
     class MD : Widget
     {
-        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch a0)
+        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
-            var f0 = LocalPlayer;
+            var lp = LocalPlayer;
 
             Height.Set(30, 0);
-            a0.Draw(GetTexture("Widgets/sprites/mdi"), new Vector2(f8.X, f8.Y), Color.White);
-            Terraria.Utils.DrawBorderString(a0, $"{f0.slotsMinions}/{f0.maxMinions}", new Vector2(35 + f8.X, f8.Y), GetInstance<Config>().f46);
-            base.DrawSelf(a0);
-            Width.Set(35 + fontMouseText.MeasureString($"{f0.slotsMinions}/{f0.maxMinions}").X, 0);
+            sb.Draw(GetTexture("Widgets/sprites/mdi"), new Vector2(tp.X, tp.Y), Color.White);
+            Terraria.Utils.DrawBorderString(sb, $"{lp.slotsMinions}/{lp.maxMinions}", new Vector2(35 + tp.X, tp.Y), GetInstance<Config>().mdc);
+            base.DrawSelf(sb);
+            Width.Set(35 + fontMouseText.MeasureString($"{lp.slotsMinions}/{lp.maxMinions}").X, 0);
         }
     }
 }

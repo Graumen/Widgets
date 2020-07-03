@@ -8,87 +8,87 @@ namespace Widgets
 {
     class Widget : UIState
     {
-        float f0, f1;
-        public bool f2, f3, f4, f5;
-        public string f6;
-        public Vector2 f7, f8, f9;
-        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch a0)
+        float x, y;
+        public bool cd, ds, flw, md;
+        public string ht;
+        public Vector2 pos, tp, cp;
+        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
-            var f0 = GetInstance<Config>().f60;
+            var ci = GetInstance<Config>().bc;
 
             if (IsMouseHovering)
             {
-                if (!f5 && GetInstance<Config>().f58) hoverItemName = f6;
-                if (ModPlayer.f1) LocalPlayer.mouseInterface = true;
+                if (!md && GetInstance<Config>().ht) hoverItemName = ht;
+                if (ModPlayer.pm) LocalPlayer.mouseInterface = true;
             }
-            if (GetInstance<Config>().f59 && ModPlayer.f1 && PW.f4 == this) a0.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)f8.X, (int)f8.Y, (int)Width.Pixels, (int)Height.Pixels), new Color(f0.R * ModPlayer.f2 / 255, f0.G * ModPlayer.f2 / 255, f0.B * ModPlayer.f2 / 255, ModPlayer.f2));
+            if (GetInstance<Config>().blink && ModPlayer.pm && PW.widget == this) sb.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X, (int)tp.Y, (int)Width.Pixels, (int)Height.Pixels), new Color(ci.R * ModPlayer.blink / 255, ci.G * ModPlayer.blink / 255, ci.B * ModPlayer.blink / 255, ModPlayer.blink));
         }
-        public Color Gradient(bool a0, Color a1, Color a2, float a3)
+        public Color Gradient(bool rg, Color start, Color end, float rate)
         {
-            byte[] f0 = { a2.R, a2.G, a2.B }, f1 = { a1.R, a1.G, a1.B };
-            float f2 = System.Drawing.Color.FromArgb(a2.R, a2.G, a2.B).GetHue(), f3 = System.Drawing.Color.FromArgb(a1.R, a1.G, a1.B).GetHue(), f4 = f2 - f3, dc = -180 == f4 && a0 || -180 > f4 ? 360 + f2 : !a0 && 180 == f4 || 180 < f4 ? f2 - 360 : f2, f5 = dc - (dc - f3) * a3, f6 = f5 < 0 ? f5 + 360 : (int)f5 > 359 ? f5 - 360 : f5, f7 = f6 / 60 - (int)f6 / 60, f8 = 1 - Mod0.SD(f0.Min() - (f0.Min() - f1.Min()) * a3, f0.Max() - (f0.Max() - f1.Max()) * a3);
-            byte f9 = (byte)(a2.A - (a2.A - a1.A) * a3), f10 = (byte)((f0.Max() - (f0.Max() - f1.Max()) * a3) * f9 / 255), f11 = (byte)((1 - f8) * f10), f12 = (byte)((1 - f7 * f8) * f10), f13 = (byte)((1 - (1 - f7) * f8) * f10);
+            byte[] ec = { end.R, end.G, end.B }, sc = { start.R, start.G, start.B };
+            float eh = System.Drawing.Color.FromArgb(end.R, end.G, end.B).GetHue(), sh = System.Drawing.Color.FromArgb(start.R, start.G, start.B).GetHue(), hd = eh - sh, dc = -180 == hd && rg || -180 > hd ? 360 + eh : !rg && 180 == hd || 180 < hd ? eh - 360 : eh, rh = dc - (dc - sh) * rate, la = rh < 0 ? rh + 360 : (int)rh > 359 ? rh - 360 : rh, ha = la / 60 - (int)la / 60, rs = 1 - Mod0.SD(ec.Min() - (ec.Min() - sc.Min()) * rate, ec.Max() - (ec.Max() - sc.Max()) * rate);
+            byte ra = (byte)(end.A - (end.A - start.A) * rate), c1 = (byte)((ec.Max() - (ec.Max() - sc.Max()) * rate) * ra / 255), c2 = (byte)((1 - rs) * c1), c3 = (byte)((1 - ha * rs) * c1), c4 = (byte)((1 - (1 - ha) * rs) * c1);
 
-            if (60 > f6) return new Color(f10, f13, f11, f9);
-            else if (120 > f6) return new Color(f12, f10, f11, f9);
-            else if (180 > f6) return new Color(f11, f10, f13, f9);
-            else if (240 > f6) return new Color(f11, f12, f10, f9);
-            else if (300 > f6) return new Color(f13, f11, f10, f9);
-            else return new Color(f10, f11, f12, f9);
+            if (60 > la) return new Color(c1, c4, c2, ra);
+            else if (120 > la) return new Color(c3, c1, c2, ra);
+            else if (180 > la) return new Color(c2, c1, c4, ra);
+            else if (240 > la) return new Color(c2, c3, c1, ra);
+            else if (300 > la) return new Color(c4, c2, c1, ra);
+            else return new Color(c1, c2, c3, ra);
         }
-        public override void MouseDown(UIMouseEvent a0)
+        public override void MouseDown(UIMouseEvent _)
         {
-            if (ModPlayer.f1)
+            if (ModPlayer.pm)
             {
-                if (PW.f0 || PW.f1 || PW.f2 || PW.f3)
+                if (PW.d || PW.l || PW.r || PW.u)
                 {
-                    ModPlayer.f0 = true;
+                    ModPlayer.br = true;
                     PlaySound(12);
                 }
                 else
                 {
-                    if (PW.f4 != this) ModPlayer.f2 = 0;
-                    f5 = true;
-                    PW.f4 = this;
+                    if (PW.widget != this) ModPlayer.blink = 0;
+                    md = true;
+                    PW.widget = this;
                 }
             }
-            f0 = mouseX - Left.Pixels;
-            f1 = mouseY - Top.Pixels;
+            x = mouseX - Left.Pixels;
+            y = mouseY - Top.Pixels;
         }
-        public override void MouseUp(UIMouseEvent a0)
+        public override void MouseUp(UIMouseEvent _)
         {
-            if (ModPlayer.f1) Mod0.Save();
-            f5 = ModPlayer.f0 = false;
-            ModPlayer.f3 = 0;
+            if (ModPlayer.pm) Mod0.Save();
+            md = ModPlayer.br = false;
+            ModPlayer.bd = 0;
         }
         public void TU()
         {
-            f7 = f5 && PW.f4 == this ? new Vector2(mouseX - f0, mouseY - f1) : !f4 || ModPlayer.f1 ? f9 : LocalPlayer.Center - screenPosition + new Vector2(-(RealScreenWidth / 2 - f9.X), LocalPlayer.gfxOffY - (RealScreenHeight / 2 - f9.Y));
-            f8 = new Vector2((int)(0 > f7.X ? 0 : f7.X + Width.Pixels > (int)(RealScreenWidth / UIScale) ? (int)(RealScreenWidth / UIScale) - Width.Pixels : f7.X), (int)(0 > f7.Y ? 0 : f7.Y + Height.Pixels > (int)(RealScreenHeight / UIScale) ? (int)(RealScreenHeight / UIScale) - Height.Pixels : f7.Y));
-            Left.Set(f8.X, 0);
-            Top.Set(f8.Y, 0);
-            if (ModPlayer.f1)
+            pos = md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || ModPlayer.pm ? cp : LocalPlayer.Center - screenPosition + new Vector2(-(RealScreenWidth / 2 - cp.X), LocalPlayer.gfxOffY - (RealScreenHeight / 2 - cp.Y));
+            tp = new Vector2((int)(0 > pos.X ? 0 : pos.X + Width.Pixels > (int)(RealScreenWidth / UIScale) ? (int)(RealScreenWidth / UIScale) - Width.Pixels : pos.X), (int)(0 > pos.Y ? 0 : pos.Y + Height.Pixels > (int)(RealScreenHeight / UIScale) ? (int)(RealScreenHeight / UIScale) - Height.Pixels : pos.Y));
+            Left.Set(tp.X, 0);
+            Top.Set(tp.Y, 0);
+            if (ModPlayer.pm)
             {
-                f9 = f8;
-                if (PW.f4 == this)
+                cp = tp;
+                if (PW.widget == this)
                 {
-                    if (150 < ModPlayer.f3)
+                    if (150 < ModPlayer.bd)
                     {
-                        if (PW.f0) f9.Y++;
-                        if (PW.f1) f9.X--;
-                        if (PW.f2) f9.X++;
-                        if (PW.f3) f9.Y--;
-                        ModPlayer.f3 = 151;
+                        if (PW.d) cp.Y++;
+                        if (PW.l) cp.X--;
+                        if (PW.r) cp.X++;
+                        if (PW.u) cp.Y--;
+                        ModPlayer.bd = 151;
                     }
-                    if (f2) ModPlayer.f2--;
-                    else ModPlayer.f2++;
-                    if (f3) PW.f4 = null;
+                    if (cd) ModPlayer.blink--;
+                    else ModPlayer.blink++;
+                    if (ds) PW.widget = null;
                 }
             }
-            if (!GetInstance<Config>().f59 || f5 || ModPlayer.f0) ModPlayer.f2 = 0;
-            if (1 > ModPlayer.f2) f2 = false;
-            if (99 < ModPlayer.f2) f2 = true;
-            if (ModPlayer.f0) ModPlayer.f3++;
+            if (!GetInstance<Config>().blink || md || ModPlayer.br) ModPlayer.blink = 0;
+            if (1 > ModPlayer.blink) cd = false;
+            if (99 < ModPlayer.blink) cd = true;
+            if (ModPlayer.br) ModPlayer.bd++;
         }
     }
 }

@@ -5,24 +5,24 @@ namespace Widgets
 {
     class MAD : Widget
     {
-        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch a0)
+        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
-            var f0 = GetInstance<Config>();
-            var f1 = Main.LocalPlayer;
-            var f2 = 0 < (int)(f1.HeldItem.mana * f1.manaCost) ? "" + f1.statMana / (int)(f1.HeldItem.mana * f1.manaCost) : "∞";
+            var ci = GetInstance<Config>();
+            var lp = Main.LocalPlayer;
+            var txt = 0 < (int)(lp.HeldItem.mana * lp.manaCost) ? "" + lp.statMana / (int)(lp.HeldItem.mana * lp.manaCost) : "∞";
 
-            if (f0.f39)
+            if (ci.madb)
             {
-                a0.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((f0.f40 ? 20 : 4) + (int)f8.X, (int)f8.Y + 4, 50, 10), Color.Black);
-                a0.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((f0.f40 ? 20 : 4) + (int)f8.X, (int)f8.Y + 4, 50 * f1.statMana / f1.statManaMax2, 10), Gradient(f0.f41, f0.f42, f0.f43, (float)f1.statMana / f1.statManaMax2));
-                a0.Draw(GetTexture("Widgets/sprites/bfg"), new Vector2((f0.f40 ? 16 : 0) + f8.X, f8.Y), Color.White);
-                if (f0.f40) a0.Draw(GetTexture("Widgets/sprites/madi2"), new Vector2(10 + f8.X, f8.Y), Color.White);
+                sb.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((ci.madi ? 20 : 4) + (int)tp.X, (int)tp.Y + 4, 50, 10), Color.Black);
+                sb.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((ci.madi ? 20 : 4) + (int)tp.X, (int)tp.Y + 4, 50 * lp.statMana / lp.statManaMax2, 10), Gradient(ci.madrg, ci.madsc, ci.madec, (float)lp.statMana / lp.statManaMax2));
+                sb.Draw(GetTexture("Widgets/sprites/bfg"), new Vector2((ci.madi ? 16 : 0) + tp.X, tp.Y), Color.White);
+                if (ci.madi) sb.Draw(GetTexture("Widgets/sprites/madi2"), new Vector2(10 + tp.X, tp.Y), Color.White);
             }
-            else Utils.DrawBorderString(a0, f2, new Vector2(23 + f8.X, f8.Y), Color.White);
-            base.DrawSelf(a0);
+            else Utils.DrawBorderString(sb, txt, new Vector2(23 + tp.X, tp.Y), Color.White);
             Height.Set(18, 0);
-            if (!f0.f39 || f0.f40) a0.Draw(GetTexture("Widgets/sprites/madi"), new Vector2(f8.X, f8.Y), Color.White);
-            Width.Set(f0.f39 ? f0.f40 ? 74 : 58 : 23 + Main.fontMouseText.MeasureString(f2).X, 0);
+            if (!ci.madb || ci.madi) sb.Draw(GetTexture("Widgets/sprites/madi"), new Vector2(tp.X, tp.Y), Color.White);
+            base.DrawSelf(sb);
+            Width.Set(ci.madb ? ci.madi ? 74 : 58 : 23 + Main.fontMouseText.MeasureString(txt).X, 0);
         }
     }
 }

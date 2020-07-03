@@ -5,24 +5,24 @@ namespace Widgets
 {
     class BLB : Widget
     {
-        protected override void DrawSelf(SpriteBatch a0)
+        protected override void DrawSelf(SpriteBatch sb)
         {
-            var f0 = GetInstance<Config>();
-            var f1 = Terraria.Main.LocalPlayer;
-            var f2 = "Always" == f0.f3 || 0 < f1.breath && f1.breath < f1.breathMax && 0 < f1.lavaTime && f1.lavaTime < f1.lavaMax || ModPlayer.f1;
+            var ci = GetInstance<Config>();
+            var lp = Terraria.Main.LocalPlayer;
+            var con = "Always" == ci.blbv || 0 < lp.breath && lp.breath < lp.breathMax && 0 < lp.lavaTime && lp.lavaTime < lp.lavaMax || ModPlayer.pm;
 
-            void DrawBar(bool a1, Color a2, float a3, SpriteBatch a4, Texture2D a5, int a6 = 0)
+            void DrawBar(bool _, Color a, float b, SpriteBatch c, Texture2D d, int e = 0)
             {
-                a4.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)f8.X + (a1 ? 20 : 4), (int)f8.Y + 4 + a6, 50, 10), Color.Black);
-                a4.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)f8.X + (a1 ? 20 : 4), (int)f8.Y + 4 + a6, (int)a3, 10), a2);
-                a4.Draw(GetTexture("Widgets/sprites/bfg"), new Vector2((a1 ? 16 : 0) + f8.X, f8.Y + a6), Color.White);
-                if (a1) a4.Draw(a5, new Vector2(f8.X, f8.Y + a6), Color.White);
+                c.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X + (_ ? 20 : 4), (int)tp.Y + 4 + e, 50, 10), Color.Black);
+                c.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X + (_ ? 20 : 4), (int)tp.Y + 4 + e, (int)b, 10), a);
+                c.Draw(GetTexture("Widgets/sprites/bfg"), new Vector2((_ ? 16 : 0) + tp.X, tp.Y + e), Color.White);
+                if (_) c.Draw(d, new Vector2(tp.X, tp.Y + e), Color.White);
             }
-            Height.Set(f2 ? 34 : 18, 0);
-            DrawBar(f0.f5, Gradient(f0.f9, f0.f10, f0.f11, Mod0.SD(f1.lavaTime, f1.lavaMax)), Mod0.SD(50 * f1.lavaTime, f1.lavaMax), a0, GetTexture("Widgets/sprites/bli"), f2 ? 16 : 0);
-            if ("Always" == f0.f3 || 0 < f1.breath && f1.breath < f1.breathMax || ModPlayer.f1) DrawBar(f0.f5, Gradient(f0.f6, f0.f7, f0.f8, Mod0.SD(f1.breath, f1.breathMax)), Mod0.SD(50 * f1.breath, f1.breathMax), a0, GetTexture("Widgets/sprites/bbi"));
-            base.DrawSelf(a0);
-            Width.Set(f0.f5 ? 74 : 58, 0);
+            Height.Set(con ? 34 : 18, 0);
+            DrawBar(ci.blbi, Gradient(ci.lbrg, ci.lbsc, ci.lbec, Mod0.SD(lp.lavaTime, lp.lavaMax)), Mod0.SD(50 * lp.lavaTime, lp.lavaMax), sb, GetTexture("Widgets/sprites/bli"), con ? 16 : 0);
+            if ("Always" == ci.blbv || 0 < lp.breath && lp.breath < lp.breathMax || ModPlayer.pm) DrawBar(ci.blbi, Gradient(ci.bbrg, ci.bbsc, ci.bbec, Mod0.SD(lp.breath, lp.breathMax)), Mod0.SD(50 * lp.breath, lp.breathMax), sb, GetTexture("Widgets/sprites/bbi"));
+            base.DrawSelf(sb);
+            Width.Set(ci.blbi ? 74 : 58, 0);
         }
     }
 }

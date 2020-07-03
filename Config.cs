@@ -9,15 +9,15 @@ namespace Widgets
 
         [DefaultValue(true)]
         [Label("Visibility")]
-        public bool f0;
+        public bool adv;
 
         [DefaultValue(true)]
         [Label("Follow Player")]
-        public bool f1;
+        public bool adf;
 
         [DefaultValue(typeof(Color), "63,81,151,179")]
         [Label("Background Color")]
-        public Color f2;
+        public Color adc;
 
         [Header("[c/ffff00:Breath and Lava Immunity Bar]")]
 
@@ -25,39 +25,39 @@ namespace Widgets
         [DrawTicks]
         [Label("Visibility")]
         [OptionStrings(new string[] { "Always", "Vanilla", "Off" })]
-        public string f3;
+        public string blbv;
 
         [DefaultValue(true)]
         [Label("Follow Player")]
-        public bool f4;
+        public bool blbf;
 
         [DefaultValue(true)]
         [Label("Icon")]
-        public bool f5;
+        public bool blbi;
 
         [DefaultValue(false)]
         [Label("Reverse Breath Bar Gradient")]
-        public bool f6;
+        public bool bbrg;
 
         [DefaultValue(typeof(Color), "0,128,255,255")]
         [Label("Breath Bar Start Color")]
-        public Color f7;
+        public Color bbsc;
 
         [DefaultValue(typeof(Color), "0,128,255,255")]
         [Label("Breath Bar End Color")]
-        public Color f8;
+        public Color bbec;
 
         [DefaultValue(false)]
         [Label("Reverse Lava Immunity Bar Gradient")]
-        public bool f9;
+        public bool lbrg;
 
         [DefaultValue(typeof(Color), "255,85,0,255")]
         [Label("Lava Immunity Bar Start Color")]
-        public Color f10;
+        public Color lbsc;
 
         [DefaultValue(typeof(Color), "255,85,0,255")]
         [Label("Lava Immunity Bar End Color")]
-        public Color f11;
+        public Color lbec;
 
         [Header("[c/ffff00:Buff Display]")]
 
@@ -65,12 +65,12 @@ namespace Widgets
         [DrawTicks]
         [Label("Visibility")]
         [OptionStrings(new string[] { "Current + Max Buffs", "Current Buffs", "Off" })]
-        public string f12;
+        public string bdv;
 
         [ColorNoAlpha]
         [DefaultValue(typeof(Color), "255,255,255,255")]
         [Label("Color")]
-        public Color f13;
+        public Color bdc;
 
         [Header("[c/ffff00:Flight Time Bar]")]
 
@@ -78,81 +78,81 @@ namespace Widgets
         [DrawTicks]
         [Label("Visibility")]
         [OptionStrings(new string[] { "Always", "Only in Flight", "Only in Flight, not on first Jump", "Off" })]
-        public string f14;
+        public string ftbv;
 
         [DefaultValue(true)]
         [Label("Follow Player")]
-        public bool f15;
+        public bool ftbf;
 
         [DefaultValue(true)]
         [Label("Icon")]
-        public bool f16;
+        public bool ftbi;
 
         [DefaultValue(false)]
         [Label("Reverse Gradient")]
-        public bool f17;
+        public bool ftbrg;
 
         [DefaultValue(typeof(Color), "0,255,255,255")]
         [Label("Bar Start Color")]
-        public Color f18;
+        public Color ftbsc;
 
         [DefaultValue(typeof(Color), "0,255,255,255")]
         [Label("Bar End Color")]
-        public Color f19;
+        public Color ftbec;
 
         [Header("[c/ffff00:Heal Display]")]
 
         [DefaultValue(true)]
         [Label("Visibility")]
-        public bool f20;
+        public bool hdv;
 
         [DefaultValue(75)]
         [Label("Show until")]
         [Range(1, 100)]
         [Slider]
         [Tooltip("% Efficiency")]
-        public int f21;
+        public int hdsu;
 
         [DefaultValue(true)]
         [Label("Follow Player")]
-        public bool f22;
+        public bool hdf;
 
         [ColorNoAlpha]
         [DefaultValue(typeof(Color), "255,255,255,255")]
         [Label("Text Color")]
-        public Color f23;
+        public Color hdc;
 
         [Header("[c/ffff00:Health Bar]")]
 
         [DefaultValue(true)]
         [Label("Visibility")]
-        public bool f24;
+        public bool hbv;
 
         [DefaultValue(100)]
         [Label("Show from")]
         [Slider]
         [Tooltip("% Health")]
-        public int f25;
+        public int hbsf;
 
         [DefaultValue(true)]
         [Label("Follow Player")]
-        public bool f26;
+        public bool hbf;
 
         [DefaultValue(true)]
         [Label("Icon")]
-        public bool f27;
+        public bool hbi;
 
         [DefaultValue(false)]
         [Label("Reverse Gradient")]
-        public bool f28;
+        public bool hbrg;
 
         [DefaultValue(typeof(Color), "0,255,0,255")]
         [Label("Bar Start Color")]
-        public Color f29;
+        public Color hbsc;
 
         [DefaultValue(typeof(Color), "255,0,0,255")]
         [Label("Bar End Color")]
-        public Color f30;
+        public Color hbec;
 
         [Header("[c/ffff00:Invincibility Time Bar]")]
 
@@ -160,27 +160,27 @@ namespace Widgets
         [DrawTicks]
         [Label("Visibility")]
         [OptionStrings(new string[] { "Always", "Only while Invincible", "Off" })]
-        public string f31;
+        public string itbv;
 
         [DefaultValue(true)]
         [Label("Follow Player")]
-        public bool f32;
+        public bool itbf;
 
         [DefaultValue(true)]
         [Label("Icon")]
-        public bool f33;
+        public bool itbi;
 
         [DefaultValue(false)]
         [Label("Reverse Gradient")]
-        public bool f34;
+        public bool itbrg;
 
         [DefaultValue(typeof(Color), "255,0,255,255")]
         [Label("Bar Start Color")]
-        public Color f35;
+        public Color itbsc;
 
         [DefaultValue(typeof(Color), "255,0,255,255")]
         [Label("Bar End Color")]
-        public Color f36;
+        public Color itbec;
 
         [Header("[c/ffff00:Mana Display]")]
 
@@ -188,118 +188,118 @@ namespace Widgets
         [DrawTicks]
         [Label("Visibility")]
         [OptionStrings(new string[] { "Always", "Default", "Off" })]
-        public string f37;
+        public string madv;
 
         [DefaultValue(true)]
         [Label("Follow Player")]
-        public bool f38;
+        public bool madf;
 
         [DefaultValue(false)]
         [Label("Bar")]
-        public bool f39;
+        public bool madb;
 
         [DefaultValue(true)]
         [Label("Icon")]
-        public bool f40;
+        public bool madi;
 
         [DefaultValue(false)]
         [Label("Reverse Gradient")]
-        public bool f41;
+        public bool madrg;
 
         [DefaultValue(typeof(Color), "77,106,255,255")]
         [Label("Bar Start Color")]
-        public Color f42;
+        public Color madsc;
 
         [DefaultValue(typeof(Color), "77,106,255,255")]
         [Label("Bar End Color")]
-        public Color f43;
+        public Color madec;
 
         [Header("[c/ffff00:Minion Display]")]
 
         [DefaultValue(true)]
         [Label("Visibility")]
-        public bool f44;
+        public bool mdv;
 
         [DefaultValue(false)]
         [Label("Follow Player")]
-        public bool f45;
+        public bool mdf;
 
         [ColorNoAlpha]
         [DefaultValue(typeof(Color), "255,255,255,255")]
         [Label("Text Color")]
-        public Color f46;
+        public Color mdc;
 
         [Header("[c/ffff00:Positioning Widget]")]
 
         [DefaultValue(typeof(Color), "63,81,151,179")]
         [Label("Background Color")]
-        public Color f47;
+        public Color pwbc;
 
         [ColorNoAlpha]
         [DefaultValue(typeof(Color), "255,255,255,255")]
         [Label("Text Color")]
-        public Color f48;
+        public Color pwtc;
 
         [Header("[c/ffff00:Real Time Clock]")]
 
         [DefaultValue(true)]
         [Label("Visibility")]
-        public bool f49;
+        public bool rtcv;
 
         [DefaultValue(false)]
         [Label("Follow Player")]
-        public bool f50;
+        public bool rtcflw;
 
         [DefaultValue("H:mm")]
         [DrawTicks]
         [Label("Format")]
         [OptionStrings(new string[] { "H:m", "H:m:s", "H:m:ss", "H:mm", "H:mm:s", "H:mm:ss", "HH:m", "HH:m:s", "HH:m:ss", "HH:mm", "HH:mm:s", "HH:mm:ss" })]
-        public string f51;
+        public string rtcfm;
 
         [DefaultValue(typeof(Color), "63,81,151,179")]
         [Label("Background Color")]
-        public Color f52;
+        public Color rtcbc;
 
         [ColorNoAlpha]
         [DefaultValue(typeof(Color), "255,255,255,255")]
         [Label("Text Color")]
-        public Color f53;
+        public Color rtctc;
 
         [Header("[c/ffff00:Sentry Display]")]
 
         [DefaultValue(true)]
         [Label("Visibility")]
-        public bool f54;
+        public bool sdv;
 
         [DefaultValue(false)]
         [Label("Follow Player")]
-        public bool f55;
+        public bool sdf;
 
         [ColorNoAlpha]
         [DefaultValue(typeof(Color), "255,255,255,255")]
         [Label("Text Color")]
-        public Color f56;
+        public Color sdc;
 
         [Header("[c/ffff00:Miscellaneous]")]
 
         [DefaultValue(true)]
         [Label("Vanilla Health and Mana Displays")]
-        public bool f57;
+        public bool hv;
 
         [DefaultValue(true)]
         [Label("Hover Text")]
         [Tooltip("Show additional Information when hovering over some Widgets")]
-        public bool f58;
+        public bool ht;
 
         [DefaultValue(true)]
         [Label("Blink")]
         [Tooltip("Widgets blink when selected")]
-        public bool f59;
+        public bool blink;
 
         [ColorNoAlpha]
         [DefaultValue(typeof(Color), "255,255,255,255")]
         [Label("Blink Color")]
-        public Color f60;
+        public Color bc;
         public override ConfigScope Mode => ConfigScope.ClientSide;
     }
 }
