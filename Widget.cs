@@ -19,9 +19,9 @@ namespace Widgets
             if (IsMouseHovering)
             {
                 if (!md && GetInstance<Config>().ht) hoverItemName = ht;
-                if (ModPlayer.pm) LocalPlayer.mouseInterface = true;
+                if (MP.pm) LocalPlayer.mouseInterface = true;
             }
-            if (GetInstance<Config>().blink && ModPlayer.pm && PW.widget == this) sb.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X, (int)tp.Y, (int)Width.Pixels, (int)Height.Pixels), new Color(ci.R * ModPlayer.blink / 255, ci.G * ModPlayer.blink / 255, ci.B * ModPlayer.blink / 255, ModPlayer.blink));
+            if (PW.widget == this) sb.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X, (int)tp.Y, (int)Width.Pixels, (int)Height.Pixels), new Color(ci.R * MP.blink / 255, ci.G * MP.blink / 255, ci.B * MP.blink / 255, MP.blink));
         }
         public Color Gradient(bool rg, Color start, Color end, float rate)
         {
@@ -38,57 +38,52 @@ namespace Widgets
         }
         public override void MouseDown(UIMouseEvent _)
         {
-            if (ModPlayer.pm)
+            if (MP.pm)
             {
-                if (PW.d || PW.l || PW.r || PW.u)
-                {
-                    ModPlayer.br = true;
-                    PlaySound(12);
-                }
-                else
-                {
-                    if (PW.widget != this) ModPlayer.blink = 0;
-                    md = true;
-                    PW.widget = this;
-                }
+                md = true;
+                PW.widget = this;
             }
             x = mouseX - Left.Pixels;
             y = mouseY - Top.Pixels;
         }
         public override void MouseUp(UIMouseEvent _)
         {
-            if (ModPlayer.pm) Mod0.Save();
-            md = ModPlayer.br = false;
-            ModPlayer.bd = 0;
+            md = MP.br = PW.d.md = PW.l.md = PW.r.md = PW.u.md = false;
+            Mod0.Save();
+            MP.pwbd = 0;
         }
         public void TU()
         {
-            pos = md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || ModPlayer.pm ? cp : LocalPlayer.Center - screenPosition + new Vector2(-(RealScreenWidth / 2 - cp.X), LocalPlayer.gfxOffY - (RealScreenHeight / 2 - cp.Y));
+            pos = !MP.br && md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || MP.pm ? cp : LocalPlayer.Center - screenPosition + new Vector2(-(RealScreenWidth / 2 - cp.X), LocalPlayer.gfxOffY - (RealScreenHeight / 2 - cp.Y));
             tp = new Vector2((int)(0 > pos.X ? 0 : pos.X + Width.Pixels > (int)(RealScreenWidth / UIScale) ? (int)(RealScreenWidth / UIScale) - Width.Pixels : pos.X), (int)(0 > pos.Y ? 0 : pos.Y + Height.Pixels > (int)(RealScreenHeight / UIScale) ? (int)(RealScreenHeight / UIScale) - Height.Pixels : pos.Y));
             Left.Set(tp.X, 0);
             Top.Set(tp.Y, 0);
-            if (ModPlayer.pm)
+            if (MP.pm)
             {
                 cp = tp;
                 if (PW.widget == this)
                 {
-                    if (150 < ModPlayer.bd)
+                    if (29 < MP.pwbd)
                     {
-                        if (PW.d) cp.Y++;
-                        if (PW.l) cp.X--;
-                        if (PW.r) cp.X++;
-                        if (PW.u) cp.Y--;
-                        ModPlayer.bd = 151;
+                        if (PW.d.md) PW.widget.cp.Y++;
+                        if (PW.l.md) PW.widget.cp.X--;
+                        if (PW.r.md) PW.widget.cp.X++;
+                        if (PW.u.md) PW.widget.cp.Y--;
+                        MP.pwbd = 30;
                     }
-                    if (cd) ModPlayer.blink--;
-                    else ModPlayer.blink++;
+                    if (cd) MP.blink -= 2;
+                    else if (59 < MP.bd)
+                    {
+                        MP.bd = 60;
+                        MP.blink += 2;
+                    }
                     if (ds) PW.widget = null;
+                    MP.bd++;
                 }
             }
-            if (!GetInstance<Config>().blink || md || ModPlayer.br) ModPlayer.blink = 0;
-            if (1 > ModPlayer.blink) cd = false;
-            if (99 < ModPlayer.blink) cd = true;
-            if (ModPlayer.br) ModPlayer.bd++;
+            if (!GetInstance<Config>().blink || md || MP.br) MP.bd = MP.blink = 0;
+            if (1 > MP.blink) cd = false;
+            if (99 < MP.blink) cd = true;
         }
     }
 }

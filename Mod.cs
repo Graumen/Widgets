@@ -68,9 +68,9 @@ namespace Widgets
                 il.Insert(mti, new LegacyGameInterfaceLayer("", () =>
                 {
                     if (!playerInventory && "Off" != ci.bdv && 0 < cb) Terraria.Utils.DrawBorderString(sb, $"{cb + ("Current Buffs" != ci.bdv ? "/" + lp.buffType.Length : "")}", new Vector2(70 + 418 * ((cb - 1) / 11f - (cb - 1) / 11), 76 + 50 * ((cb - 1) / 11)), ci.bdc);
-                    if ((0 < lp.HeldItem.useAmmo && lp.HasAmmo(lp.HeldItem, true) || ModPlayer.pm) && ci.adv) adui.Draw(sb, gt);
-                    if ("Always" == ci.blbv || "Off" != ci.blbv && (!lp.dead && (0 < lp.breath && lp.breath < lp.breathMax || 0 < lp.lavaTime && lp.lavaTime < lp.lavaMax) || ModPlayer.pm)) blbui.Draw(sb, gt);
-                    if ("Always" == ci.ftbv || "Off" != ci.ftbv && ModPlayer.pm) ftbui.Draw(sb, gt);
+                    if ((0 < lp.HeldItem.useAmmo && lp.HasAmmo(lp.HeldItem, true) || MP.pm) && ci.adv) adui.Draw(sb, gt);
+                    if ("Always" == ci.blbv || "Off" != ci.blbv && (!lp.dead && (0 < lp.breath && lp.breath < lp.breathMax || 0 < lp.lavaTime && lp.lavaTime < lp.lavaMax) || MP.pm)) blbui.Draw(sb, gt);
+                    if ("Always" == ci.ftbv || "Off" != ci.ftbv && MP.pm) ftbui.Draw(sb, gt);
                     if (ftbc)
                     {
                         if (!gamePaused && lp.controlJump)
@@ -82,8 +82,8 @@ namespace Widgets
                         if (ftbc2) tft = ft = 0;
                     }
                     else ft = tft = 0;
-                    if ((!lp.dead && 100 * lp.statLife / lp.statLifeMax2 <= ci.hbsf || ModPlayer.pm) && ci.hbv) hbui.Draw(sb, gt);
-                    if ((!(0 < lp.potionDelay || ci.hdsu > cap || lp.dead || lp.noItems || lp.statLife == lp.statLifeMax2) || ModPlayer.pm) && ci.hdv) hdui.Draw(sb, gt);
+                    if ((!lp.dead && 100 * lp.statLife / lp.statLifeMax2 <= ci.hbsf || MP.pm) && ci.hbv) hbui.Draw(sb, gt);
+                    if ((!(0 < lp.potionDelay || ci.hdsu > cap || lp.dead || lp.noItems || lp.statLife == lp.statLifeMax2) || MP.pm) && ci.hdv) hdui.Draw(sb, gt);
                     if (!lp.dead && "Off" != ci.itbv && lp.immune)
                     {
                         if (!gamePaused)
@@ -93,11 +93,11 @@ namespace Widgets
                         }
                         itbui.Draw(sb, gt);
                     }
-                    else it = tit = ModPlayer.it = 0;
-                    if ("Always" == ci.itbv || "Off" != ci.itbv && ModPlayer.pm) itbui.Draw(sb, gt);
-                    if ("Always" == ci.madv || "Off" != ci.madv && (0 < lp.HeldItem.mana || ModPlayer.pm)) madui.Draw(sb, gt);
+                    else it = tit = MP.it = 0;
+                    if ("Always" == ci.itbv || "Off" != ci.itbv && MP.pm) itbui.Draw(sb, gt);
+                    if ("Always" == ci.madv || "Off" != ci.madv && (0 < lp.HeldItem.mana || MP.pm)) madui.Draw(sb, gt);
                     if (ci.mdv) mdui.Draw(sb, gt);
-                    if (ModPlayer.pm) pwui.Draw(sb, gt);
+                    if (MP.pm) pwui.Draw(sb, gt);
                     if (ci.rtcv) rtcui.Draw(sb, gt);
                     if (ci.sdv) sdui.Draw(sb, gt);
                     hv.Draw(sb, gt);
@@ -114,7 +114,7 @@ namespace Widgets
             ftb.ds = "Off" == ci.ftbv;
             ftb.flw = ci.ftbf;
             ftb.TU();
-            ftbc = !((0 < jc && 0 == lp.mount.FlyTime && 0 == lp.wingTime || 0 < lp.wingTime && lp.jumpAgainCloud) && 0 == lp.jump && lp.controlJump) && !lp.dead && !lp.mount.CanHover && !lp.sliding && "Off" != ci.ftbv && (!("Only in Flight, not on first Jump" == ci.ftbv && 0 < lp.jump && fj) || ModPlayer.pm) && (!lp.mount.Active && (!lp.canCarpet && 0 < lp.carpetTime && lp.carpet || (0 < lp.rocketBoots && 0 < lp.rocketTime || lp.canCarpet) && lp.rocketRelease || 0 < lp.wingTime) || 0 < jc || 0 < lp.jump || 0 < lp.mount.FlyTime) && 0 != lp.velocity.Y && 0 > lp.grappling[0];
+            ftbc = !((0 < jc && 0 == lp.mount.FlyTime && 0 == lp.wingTime || 0 < lp.wingTime && lp.jumpAgainCloud) && 0 == lp.jump && lp.controlJump) && !lp.dead && !lp.mount.CanHover && !lp.sliding && "Off" != ci.ftbv && (!("Only in Flight, not on first Jump" == ci.ftbv && 0 < lp.jump && fj) || MP.pm) && (!lp.mount.Active && (!lp.canCarpet && 0 < lp.carpetTime && lp.carpet || (0 < lp.rocketBoots && 0 < lp.rocketTime || lp.canCarpet) && lp.rocketRelease || 0 < lp.wingTime) || 0 < jc || 0 < lp.jump || 0 < lp.mount.FlyTime) && 0 != lp.velocity.Y && 0 > lp.grappling[0];
             ftbc2 = !lp.mount.Active && 0 == lp.jump && 0 == lp.rocketTime && 0 == lp.wingTime && lp.canCarpet || 0 < jc && lp.releaseJump;
             hb.ds = !ci.hbv;
             hb.flw = ci.hbf;
@@ -165,7 +165,6 @@ namespace Widgets
             rtcui?.Update(gt);
             sdui?.Update(gt);
         }
-        public static float SD(float _, float a) => 0 < a ? _ / a : 0;
         public static void Save()
         {
             var mcp = Terraria.ModLoader.Config.ConfigManager.ModConfigPath;
@@ -185,5 +184,6 @@ namespace Widgets
             pi.sd = sd.cp;
             File.WriteAllText(mcp + "/Widgets_Positions.json", JsonConvert.SerializeObject(pi, new JsonSerializerSettings { Formatting = Formatting.Indented }));
         }
+        public static float SD(float _, float a) => 0 < a ? _ / a : 0;
     }
 }

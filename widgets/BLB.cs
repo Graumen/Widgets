@@ -9,7 +9,7 @@ namespace Widgets
         {
             var ci = GetInstance<Config>();
             var lp = Terraria.Main.LocalPlayer;
-            var con = "Always" == ci.blbv || 0 < lp.breath && lp.breath < lp.breathMax && 0 < lp.lavaTime && lp.lavaTime < lp.lavaMax || ModPlayer.pm;
+            var con = "Always" == ci.blbv || 0 < lp.breath && lp.breath < lp.breathMax && 0 < lp.lavaTime && lp.lavaTime < lp.lavaMax || MP.pm;
 
             void DrawBar(bool _, Color a, float b, SpriteBatch c, Texture2D d, int e = 0)
             {
@@ -20,7 +20,7 @@ namespace Widgets
             }
             Height.Set(con ? 34 : 18, 0);
             DrawBar(ci.blbi, Gradient(ci.lbrg, ci.lbsc, ci.lbec, Mod0.SD(lp.lavaTime, lp.lavaMax)), Mod0.SD(50 * lp.lavaTime, lp.lavaMax), sb, GetTexture("Widgets/sprites/bli"), con ? 16 : 0);
-            if ("Always" == ci.blbv || 0 < lp.breath && lp.breath < lp.breathMax || ModPlayer.pm) DrawBar(ci.blbi, Gradient(ci.bbrg, ci.bbsc, ci.bbec, Mod0.SD(lp.breath, lp.breathMax)), Mod0.SD(50 * lp.breath, lp.breathMax), sb, GetTexture("Widgets/sprites/bbi"));
+            if ("Always" == ci.blbv || 0 < lp.breath && lp.breath < lp.breathMax || MP.pm) DrawBar(ci.blbi, Gradient(ci.bbrg, ci.bbsc, ci.bbec, Mod0.SD(lp.breath, lp.breathMax)), Mod0.SD(50 * lp.breath, lp.breathMax), sb, GetTexture("Widgets/sprites/bbi"));
             base.DrawSelf(sb);
             Width.Set(ci.blbi ? 74 : 58, 0);
         }
