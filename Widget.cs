@@ -38,7 +38,7 @@ namespace Widgets
         }
         public override void MouseDown(UIMouseEvent _)
         {
-            if (MP.pm)
+            if (!(PW.d || PW.l || PW.r || PW.u) && MP.pm)
             {
                 md = true;
                 PW.widget = this;
@@ -48,13 +48,13 @@ namespace Widgets
         }
         public override void MouseUp(UIMouseEvent _)
         {
-            md = MP.br = PW.d.md = PW.l.md = PW.r.md = PW.u.md = false;
+            md = PW.dmd = PW.lmd = PW.rmd = PW.umd = false;
             Mod0.Save();
-            MP.pwbd = 0;
+            MP.br = 0;
         }
         public void TU()
         {
-            pos = !MP.br && md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || MP.pm ? cp : LocalPlayer.Center - screenPosition + new Vector2(-(RealScreenWidth / 2 - cp.X), LocalPlayer.gfxOffY - (RealScreenHeight / 2 - cp.Y));
+            pos = md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || MP.pm ? cp : LocalPlayer.Center - screenPosition + new Vector2(-(RealScreenWidth / 2 - cp.X), LocalPlayer.gfxOffY - (RealScreenHeight / 2 - cp.Y));
             tp = new Vector2((int)(0 > pos.X ? 0 : pos.X + Width.Pixels > (int)(RealScreenWidth / UIScale) ? (int)(RealScreenWidth / UIScale) - Width.Pixels : pos.X), (int)(0 > pos.Y ? 0 : pos.Y + Height.Pixels > (int)(RealScreenHeight / UIScale) ? (int)(RealScreenHeight / UIScale) - Height.Pixels : pos.Y));
             Left.Set(tp.X, 0);
             Top.Set(tp.Y, 0);
@@ -63,13 +63,13 @@ namespace Widgets
                 cp = tp;
                 if (PW.widget == this)
                 {
-                    if (29 < MP.pwbd)
+                    if (29 < MP.br)
                     {
-                        if (PW.d.md) PW.widget.cp.Y++;
-                        if (PW.l.md) PW.widget.cp.X--;
-                        if (PW.r.md) PW.widget.cp.X++;
-                        if (PW.u.md) PW.widget.cp.Y--;
-                        MP.pwbd = 30;
+                        if (PW.dmd) PW.widget.cp.Y++;
+                        if (PW.lmd) PW.widget.cp.X--;
+                        if (PW.rmd) PW.widget.cp.X++;
+                        if (PW.umd) PW.widget.cp.Y--;
+                        MP.br = 30;
                     }
                     if (cd) MP.blink -= 2;
                     else if (59 < MP.bd)
@@ -81,7 +81,7 @@ namespace Widgets
                     MP.bd++;
                 }
             }
-            if (!GetInstance<Config>().blink || md || MP.br) MP.bd = MP.blink = 0;
+            if (!GetInstance<Config>().blink || md || PW.dmd || PW.lmd || PW.rmd || PW.umd) MP.bd = MP.blink = 0;
             if (1 > MP.blink) cd = false;
             if (99 < MP.blink) cd = true;
         }
