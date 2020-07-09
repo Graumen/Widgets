@@ -11,7 +11,7 @@ namespace Widgets
             Top.Set(b, 0);
             Width.Set(c, 0);
         }
-        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb) => LocalPlayer.mouseInterface = true;
+        protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb) { if (ContainsPoint(MouseScreen)) LocalPlayer.mouseInterface = true; }
         public override void MouseOver(UIMouseEvent evt) => PlaySound(12);
     }
 }
