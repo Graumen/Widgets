@@ -13,7 +13,7 @@ namespace Widgets
                 Main.NewText("Positioning Mode " + (pm ? "[c/ff0000:Off]" : "[c/00ff00:On]"));
                 pm = !pm;
             }
-            if (PW.dmd || PW.lmd || PW.rmd || PW.umd) br++;
+            if (PW.d.md || PW.l.md || PW.r.md || PW.u.md) br++;
         }
         public override void OnHitByNPC(NPC _, int a, bool b) => it = Main.LocalPlayer.immuneTime;
         public override void OnHitByProjectile(Projectile _, int a, bool b) => it = Main.LocalPlayer.immuneTime;

@@ -18,7 +18,7 @@ namespace Widgets
 
             if (IsMouseHovering)
             {
-                if (!md && GetInstance<Config>().ht) hoverItemName = ht;
+                if (!(md && MP.pm) && GetInstance<Config>().ht) hoverItemName = ht;
                 if (MP.pm) LocalPlayer.mouseInterface = true;
             }
             if (PW.widget == this) sb.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X, (int)tp.Y, (int)Width.Pixels, (int)Height.Pixels), new Color(ci.R * MP.blink / 255, ci.G * MP.blink / 255, ci.B * MP.blink / 255, MP.blink));
@@ -38,7 +38,7 @@ namespace Widgets
         }
         public override void MouseDown(UIMouseEvent _)
         {
-            if (!(PW.d || PW.l || PW.r || PW.u) && MP.pm)
+            if (!(PW.d.mo || PW.l.mo || PW.r.mo || PW.u.mo) && MP.pm)
             {
                 md = true;
                 PW.widget = this;
@@ -48,9 +48,8 @@ namespace Widgets
         }
         public override void MouseUp(UIMouseEvent _)
         {
-            md = PW.dmd = PW.lmd = PW.rmd = PW.umd = false;
+            md = false;
             Mod0.Save();
-            MP.br = 0;
         }
         public void TU()
         {
@@ -65,10 +64,10 @@ namespace Widgets
                 {
                     if (29 < MP.br)
                     {
-                        if (PW.dmd) PW.widget.cp.Y++;
-                        if (PW.lmd) PW.widget.cp.X--;
-                        if (PW.rmd) PW.widget.cp.X++;
-                        if (PW.umd) PW.widget.cp.Y--;
+                        if (PW.d.md) PW.widget.cp.Y++;
+                        if (PW.l.md) PW.widget.cp.X--;
+                        if (PW.r.md) PW.widget.cp.X++;
+                        if (PW.u.md) PW.widget.cp.Y--;
                         MP.br = 30;
                     }
                     if (cd) MP.blink -= 2;
@@ -81,7 +80,7 @@ namespace Widgets
                     MP.bd++;
                 }
             }
-            if (!GetInstance<Config>().blink || md || PW.dmd || PW.lmd || PW.rmd || PW.umd) MP.bd = MP.blink = 0;
+            if (!GetInstance<Config>().blink || md || PW.d.md || PW.l.md || PW.r.md || PW.u.md) MP.bd = MP.blink = 0;
             if (1 > MP.blink) cd = false;
             if (99 < MP.blink) cd = true;
         }

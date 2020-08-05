@@ -6,34 +6,32 @@ namespace Widgets
 {
     class PWB : UIElement
     {
-        public bool md;
-        int height, width, x, y;
-        public delegate void _();
-        public event _ omd;
+        public bool md, mo;
+        public delegate void MD();
+        public event MD omd;
         Texture2D tex;
+        public PWB(int _, int a, int b, int c, Texture2D d)
+        {
+            Height.Set(_, 0);
+            Left.Set(a, 0);
+            tex = d;
+            Top.Set(b, 0);
+            Width.Set(c, 0);
+        }
         protected override void DrawSelf(SpriteBatch sb)
         {
-            Height.Set(height, 0);
-            if (ContainsPoint(MouseScreen)) LocalPlayer.mouseInterface = true;
-            Left.Set(x, 0);
-            sb.Draw(tex, new Vector2(GetDimensions().X, GetDimensions().Y), Color.White * (ContainsPoint(MouseScreen) ? 1 : 0.5f));
-            Top.Set(y, 0);
-            Width.Set(width, 0);
+            if (mo) LocalPlayer.mouseInterface = true;
+            mo = ContainsPoint(MouseScreen);
+            sb.Draw(tex, new Vector2(GetDimensions().X, GetDimensions().Y), Color.White * (md || mo ? 1 : 0.5f));
         }
         public override void MouseDown(UIMouseEvent _)
         {
             if (null != PW.widget) omd();
-            md = MP.br = true;
+            md = true;
+            MP.br = 0;
             PlaySound(12);
         }
-        public PWB(int Height, int Width, int X, int Y, Texture2D Tex)
-        {
-            height = Height;
-            tex = Tex;
-            width = Width;
-            x = X;
-            y = Y;
-        }
-        public override void MouseOver(UIMouseEvent _) => PlaySound(12);
+        public override void MouseOver(UIMouseEvent _) { if (MP.pm) PlaySound(12); }
+        public override void MouseUp(UIMouseEvent _) => md = false;
     }
 }
