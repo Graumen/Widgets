@@ -38,7 +38,7 @@ namespace Widgets
         }
         public override void MouseDown(UIMouseEvent _)
         {
-            if (!(PW.d.mo || PW.l.mo || PW.r.mo || PW.u.mo) && MP.pm)
+            if (!(PW.d.cm || PW.l.cm || PW.r.cm || PW.u.cm) && MP.pm)
             {
                 md = true;
                 PW.widget = this;
