@@ -12,7 +12,7 @@ namespace Widgets
         {
             var ci = GetInstance<Config>();
             var bc = ci.pwbc;
-            var txt = $"X = {widget?.cp.X}\nY = {widget?.cp.Y}";
+            var txt = $"X = {widget?.tp.X}\nY = {widget?.tp.Y}";
 
             d.tex = GetTexture("Widgets/sprites/d");
             Height.Set(84, 0);

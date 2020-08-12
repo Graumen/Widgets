@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using static Terraria.GameInput.PlayerInput;
 using static Terraria.Main;
 using static Terraria.ModLoader.ModContent;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace Widgets
         float x, y;
         public bool cd, ds, flw, md;
         public string ht;
-        public Vector2 pos, tp, cp;
+        public Vector2 cp, pos, tp;
         protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
             var ci = GetInstance<Config>().bc;
@@ -53,8 +52,10 @@ namespace Widgets
         }
         public void TU()
         {
-            pos = md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || MP.pm ? cp : LocalPlayer.Center - screenPosition + new Vector2(-(RealScreenWidth / 2 - cp.X), LocalPlayer.gfxOffY - (RealScreenHeight / 2 - cp.Y));
-            tp = new Vector2((int)(0 > pos.X ? 0 : pos.X + Width.Pixels > (int)(RealScreenWidth / UIScale) ? (int)(RealScreenWidth / UIScale) - Width.Pixels : pos.X), (int)(0 > pos.Y ? 0 : pos.Y + Height.Pixels > (int)(RealScreenHeight / UIScale) ? (int)(RealScreenHeight / UIScale) - Height.Pixels : pos.Y));
+            var vp = new Vector2(spriteBatch.GraphicsDevice.Viewport.Width, spriteBatch.GraphicsDevice.Viewport.Height);
+
+            pos = md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || MP.pm ? cp : LocalPlayer.Center - screenPosition + new Vector2(-(vp.X / 2 - cp.X), LocalPlayer.gfxOffY - (vp.Y / 2 - cp.Y));
+            tp = new Vector2((int)(0 > pos.X ? 0 : pos.X + Width.Pixels > (int)(vp.X / UIScale) ? (int)(vp.X / UIScale) - Width.Pixels : pos.X), (int)(0 > pos.Y ? 0 : pos.Y + Height.Pixels > (int)(vp.Y / UIScale) ? (int)(vp.Y / UIScale) - Height.Pixels : pos.Y));
             Left.Set(tp.X, 0);
             Top.Set(tp.Y, 0);
             if (MP.pm)
