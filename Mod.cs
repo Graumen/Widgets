@@ -1,7 +1,5 @@
 using Microsoft.Xna.Framework;
-using Newtonsoft.Json;
 using static Terraria.Main;
-using System.IO;
 using System.Linq;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -167,10 +165,8 @@ namespace Widgets
         }
         public static void Save()
         {
-            var mcp = Terraria.ModLoader.Config.ConfigManager.ModConfigPath;
             var pi = ModContent.GetInstance<Positions>();
 
-            Directory.CreateDirectory(mcp);
             pi.ad = ad.cp;
             pi.blb = blb.cp;
             pi.ftb = ftb.cp;
@@ -182,7 +178,6 @@ namespace Widgets
             pi.pw = pw.cp;
             pi.rtc = rtc.cp;
             pi.sd = sd.cp;
-            File.WriteAllText(mcp + "/Widgets_Positions.json", JsonConvert.SerializeObject(pi, new JsonSerializerSettings { Formatting = Formatting.Indented }));
         }
         public static float SD(float _, float a) => 0 < a ? _ / a : 0;
     }

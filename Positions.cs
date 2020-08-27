@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Reflection;
 using Terraria.ModLoader.Config;
 namespace Widgets
 {
@@ -9,5 +10,11 @@ namespace Widgets
         [System.ComponentModel.DefaultValue("500,500")]
         public Vector2 ad, blb, ftb, hb, hd, itb, mad, md, pw, rtc, sd;
         public override ConfigScope Mode => ConfigScope.ClientSide;
+        public static void Save()
+        {
+            var save = typeof(ConfigManager).GetMethod("Save", BindingFlags.NonPublic | BindingFlags.Static);
+
+            if (null != save) save.Invoke(null, new object[] { Terraria.ModLoader.ModContent.GetInstance<Positions>() });
+        }
     }
 }

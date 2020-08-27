@@ -49,6 +49,7 @@ namespace Widgets
         {
             md = false;
             Mod0.Save();
+            Positions.Save();
         }
         public void TU()
         {
