@@ -9,8 +9,7 @@ namespace Widgets
         Item ca = new Item();
         protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
-            var ci = Terraria.ModLoader.ModContent.GetInstance<Config>();
-            var bc = ci.adc;
+            var bc = Terraria.ModLoader.ModContent.GetInstance<Config>().adc;
             var lp = Main.LocalPlayer;
             var rc = new System.Collections.Generic.Dictionary<int, Color> { [0] = RarityNormal, [1] = RarityBlue, [-1] = RarityTrash, [10] = new Color(255, 40, 100), [11] = new Color(180, 40, 255), [-11] = new Color(255, 175, 0), [2] = RarityGreen, [3] = RarityOrange, [4] = RarityRed, [5] = RarityPink, [6] = RarityPurple, [7] = RarityLime, [8] = RarityYellow, [9] = RarityCyan };
             var tex = Main.itemTexture[0 < ca.type ? ca.type : 2177];

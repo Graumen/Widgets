@@ -9,8 +9,9 @@ namespace Widgets
     {
         float x, y;
         public bool cd, ds, flw, md;
+        public int cpx, cpy;
         public string ht;
-        public Vector2 cp, pos, tp;
+        public Vector2 ip, pos, tp;
         protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
             var ci = GetInstance<Config>().bc;
@@ -53,23 +54,26 @@ namespace Widgets
         }
         public void TU()
         {
+            var iw = Mod0.wl.Where(_ => _ != this && _.GetDimensions().ToRectangle().Intersects(new Rectangle((int)pos.X, (int)pos.Y, (int)Width.Pixels, (int)Height.Pixels)) && _.Width.Pixels > 0).FirstOrDefault();
             var vp = new Vector2(spriteBatch.GraphicsDevice.Viewport.Width, spriteBatch.GraphicsDevice.Viewport.Height);
 
-            pos = md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || MP.pm ? cp : LocalPlayer.Center - screenPosition + new Vector2(-(vp.X / 2 - cp.X), LocalPlayer.gfxOffY - (vp.Y / 2 - cp.Y));
-            tp = new Vector2((int)(0 > pos.X ? 0 : pos.X + Width.Pixels > (int)(vp.X / UIScale) ? (int)(vp.X / UIScale) - Width.Pixels : pos.X), (int)(0 > pos.Y ? 0 : pos.Y + Height.Pixels > (int)(vp.Y / UIScale) ? (int)(vp.Y / UIScale) - Height.Pixels : pos.Y));
+            if (iw == null) ip = pos;
+            pos = md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || MP.pm ? new Vector2(cpx, cpy) : LocalPlayer.Center - screenPosition + new Vector2(-(vp.X / 2 - cpx), LocalPlayer.gfxOffY - (vp.Y / 2 - cpy));
+            tp = new Vector2((int)((int)(vp.X / UIScale) < pos.X + Width.Pixels ? (int)(vp.X / UIScale) - Width.Pixels : 0 > pos.X ? 0 : iw != null && MP.pm && PW.widget == this ? ip.X + Width.Pixels <= iw.pos.X ? iw.pos.X - Width.Pixels : ip.X >= iw.pos.X + iw.Width.Pixels ? iw.pos.X + iw.Width.Pixels : pos.X : pos.X), (int)((int)(vp.Y / UIScale) < Height.Pixels + pos.Y ? (int)(vp.Y / UIScale) - Height.Pixels : 0 > pos.Y ? 0 : iw != null && MP.pm && PW.widget == this ? Height.Pixels + ip.Y <= iw.pos.Y ? iw.pos.Y - Height.Pixels : ip.Y >= iw.Height.Pixels + iw.pos.Y ? iw.Height.Pixels + iw.pos.Y : pos.Y : pos.Y));
             Left.Set(tp.X, 0);
             Top.Set(tp.Y, 0);
             if (MP.pm)
             {
-                cp = tp;
+                cpx = (int)tp.X;
+                cpy = (int)tp.Y;
                 if (PW.widget == this)
                 {
                     if (29 < MP.br)
                     {
-                        if (PW.d.md) PW.widget.cp.Y++;
-                        if (PW.l.md) PW.widget.cp.X--;
-                        if (PW.r.md) PW.widget.cp.X++;
-                        if (PW.u.md) PW.widget.cp.Y--;
+                        if (PW.d.md) PW.widget.cpy++;
+                        if (PW.l.md) PW.widget.cpx--;
+                        if (PW.r.md) PW.widget.cpx++;
+                        if (PW.u.md) PW.widget.cpy--;
                         MP.br = 30;
                     }
                     if (cd) MP.blink -= 2;

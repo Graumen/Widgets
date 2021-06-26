@@ -19,9 +19,15 @@ namespace Widgets
         public override void MouseDown(UIMouseEvent _)
         {
             if (null != PW.widget) omd();
-            md = true;
+            md = Mod0.md = true;
             MP.br = 0;
             PlaySound(12);
+        }
+        public override void MouseUp(UIMouseEvent _)
+        {
+            md = Mod0.md = false;
+            Mod0.Save();
+            Positions.Save();
         }
         public PWB(int _, int a, int b, int c)
         {
@@ -31,6 +37,5 @@ namespace Widgets
             Width.Set(c, 0);
         }
         public override void MouseOver(UIMouseEvent _) { if (MP.pm) PlaySound(12); }
-        public override void MouseUp(UIMouseEvent _) => md = false;
     }
 }

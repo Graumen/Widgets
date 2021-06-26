@@ -31,13 +31,13 @@ namespace Widgets
             r = new PWB(34, 61, 26, 18);
             u = new PWB(18, 26, 5, 34);
 
-            d.omd += () => { widget.cp.Y++; };
+            d.omd += () => { widget.cpy++; };
             Append(d);
-            l.omd += () => { widget.cp.X--; };
+            l.omd += () => { widget.cpx--; };
             Append(l);
-            r.omd += () => { widget.cp.X++; };
+            r.omd += () => { widget.cpx++; };
             Append(r);
-            u.omd += () => { widget.cp.Y--; };
+            u.omd += () => { widget.cpy--; };
             Append(u);
         }
     }

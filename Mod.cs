@@ -7,49 +7,26 @@ namespace Widgets
 {
     class Mod0 : Mod
     {
-        public static bool fj, ftbc, ftbc2;
+        public static bool fj, ftbc, ftbc2, md;
         public static int tft, ft, cap, tit, it, jc;
         public static ModHotKey hk;
-        static AD ad = new AD();
-        static BLB blb = new BLB();
-        static FTB ftb = new FTB();
-        static HB hb = new HB();
-        static HD hd = new HD();
-        static ITB itb = new ITB();
-        static MAD mad = new MAD();
-        static MD md = new MD();
-        static PW pw = new PW();
-        static RTC rtc = new RTC();
-        static SD sd = new SD();
+        public static Widget[] wl = { new AD(), new BLB(), new FTB(), new HB(), new HD(), new ITB(), new MAD(), new MD(), new PW(), new RTC(), new SD() };
         UserInterface adui = new UserInterface(), blbui = new UserInterface(), ftbui = new UserInterface(), hbui = new UserInterface(), hdui = new UserInterface(), hv = new UserInterface(), itbui = new UserInterface(), madui = new UserInterface(), mdui = new UserInterface(), pwui = new UserInterface(), rtcui = new UserInterface(), sdui = new UserInterface();
         public override void Load()
         {
-            var pi = ModContent.GetInstance<Positions>();
-
-            ad.cp = pi.ad;
-            adui.SetState(ad);
-            blb.cp = pi.blb;
-            blbui.SetState(blb);
-            ftb.cp = pi.ftb;
-            ftbui.SetState(ftb);
-            hb.cp = pi.hb;
-            hbui.SetState(hb);
-            hd.cp = pi.hd;
-            hdui.SetState(hd);
+            adui.SetState(wl[0]);
+            blbui.SetState(wl[1]);
+            ftbui.SetState(wl[2]);
+            hbui.SetState(wl[3]);
+            hdui.SetState(wl[4]);
             hk = RegisterHotKey("Positioning Mode", "");
             hv.SetState(new HV());
-            itb.cp = pi.itb;
-            itbui.SetState(itb);
-            mad.cp = pi.mad;
-            madui.SetState(mad);
-            md.cp = pi.md;
-            mdui.SetState(md);
-            pw.cp = pi.pw;
-            pwui.SetState(pw);
-            rtc.cp = pi.rtc;
-            rtcui.SetState(rtc);
-            sd.cp = pi.sd;
-            sdui.SetState(sd);
+            itbui.SetState(wl[5]);
+            madui.SetState(wl[6]);
+            mdui.SetState(wl[7]);
+            pwui.SetState(wl[8]);
+            rtcui.SetState(wl[9]);
+            sdui.SetState(wl[10]);
         }
         public override void ModifyInterfaceLayers(System.Collections.Generic.List<GameInterfaceLayer> il)
         {
@@ -59,6 +36,7 @@ namespace Widgets
             var lp = LocalPlayer;
             int cb = lp.CountBuffs();
             int he = (int)SD((lp.statLifeMax2 - lp.statLife) * 100, lp.inventory.Max(_ => _.healLife));
+            var pi = ModContent.GetInstance<Positions>();
             var sb = spriteBatch;
 
             if (-1 < mti)
@@ -102,46 +80,71 @@ namespace Widgets
                     return true;
                 }, InterfaceScaleType.UI));
             }
-            ad.ds = !ci.adv;
-            ad.flw = ci.adf;
-            ad.TU();
-            blb.ds = "Off" == ci.blbv;
-            blb.flw = ci.blbf;
-            blb.TU();
+            if (!md)
+            {
+                wl[0].cpx = pi.adx;
+                wl[0].cpy = pi.ady;
+                wl[1].cpx = pi.blbx;
+                wl[1].cpy = pi.blby;
+                wl[2].cpx = pi.ftbx;
+                wl[2].cpy = pi.ftby;
+                wl[3].cpx = pi.hbx;
+                wl[3].cpy = pi.hby;
+                wl[4].cpx = pi.hdx;
+                wl[4].cpy = pi.hdy;
+                wl[5].cpx = pi.itbx;
+                wl[5].cpy = pi.itby;
+                wl[6].cpx = pi.madx;
+                wl[6].cpy = pi.mady;
+                wl[7].cpx = pi.mdx;
+                wl[7].cpy = pi.mdy;
+                wl[8].cpx = pi.pwx;
+                wl[8].cpy = pi.pwy;
+                wl[9].cpx = pi.rtcx;
+                wl[9].cpy = pi.rtcy;
+                wl[10].cpx = pi.sdx;
+                wl[10].cpy = pi.sdy;
+            }
+            wl[0].ds = !ci.adv;
+            wl[0].flw = ci.adf;
+            wl[0].TU();
+            wl[1].ds = "Off" == ci.blbv;
+            wl[1].flw = ci.blbf;
+            wl[1].TU();
             cap = 100 < he ? 100 : he;
-            ftb.ds = "Off" == ci.ftbv;
-            ftb.flw = ci.ftbf;
-            ftb.TU();
+            wl[2].ds = "Off" == ci.ftbv;
+            wl[2].flw = ci.ftbf;
+            wl[2].TU();
             ftbc = !((0 < jc && 0 == lp.mount.FlyTime && 0 == lp.wingTime || 0 < lp.wingTime && lp.jumpAgainCloud) && 0 == lp.jump && lp.controlJump) && !lp.dead && !lp.mount.CanHover && !lp.sliding && "Off" != ci.ftbv && (!("Only in Flight, not on first Jump" == ci.ftbv && 0 < lp.jump && fj) || MP.pm) && (!lp.mount.Active && (!lp.canCarpet && 0 < lp.carpetTime && lp.carpet || (0 < lp.rocketBoots && 0 < lp.rocketTime || lp.canCarpet) && lp.rocketRelease || 0 < lp.wingTime) || 0 < jc || 0 < lp.jump || 0 < lp.mount.FlyTime) && 0 != lp.velocity.Y && 0 > lp.grappling[0];
             ftbc2 = !lp.mount.Active && 0 == lp.jump && 0 == lp.rocketTime && 0 == lp.wingTime && lp.canCarpet || 0 < jc && lp.releaseJump;
-            hb.ds = !ci.hbv;
-            hb.flw = ci.hbf;
-            hb.ht = $"{lp.statLife}/{lp.statLifeMax2}";
-            hb.TU();
-            hd.ds = !ci.hdv;
-            hd.flw = ci.hdf;
-            hd.TU();
+            wl[3].ds = !ci.hbv;
+            wl[3].flw = ci.hbf;
+            wl[3].ht = $"{lp.statLife}/{lp.statLifeMax2}";
+            wl[3].TU();
+            wl[4].ds = !ci.hdv;
+            wl[4].flw = ci.hdf;
+            wl[4].TU();
             if (lp.releaseJump) fj = false;
             if (0 == lp.velocity.Y || lp.sliding) fj = true;
             il.RemoveAll(_ => _.Name == "Vanilla: Resource Bars");
-            itb.ds = "Off" == ci.itbv; ;
-            itb.flw = ci.itbf;
-            itb.TU();
+            wl[5].ds = "Off" == ci.itbv; ;
+            wl[5].flw = ci.itbf;
+            wl[5].TU();
             jc = new[] { lp.jumpAgainBlizzard, lp.jumpAgainCloud, lp.jumpAgainFart, lp.jumpAgainSail, lp.jumpAgainSandstorm, lp.jumpAgainUnicorn }.Where(_ => _).Count();
-            mad.ds = "Off" == ci.madv;
-            mad.flw = ci.madf;
-            mad.ht = $"{lp.statMana}/{lp.statManaMax2}";
-            mad.TU();
-            md.ds = !ci.mdv;
-            md.flw = ci.mdf;
-            md.TU();
-            pw.TU();
-            rtc.ds = !ci.rtcv;
-            rtc.flw = ci.rtcflw;
-            rtc.TU();
-            sd.ds = !ci.sdv;
-            sd.flw = ci.sdf;
-            sd.TU();
+            wl[6].ds = "Off" == ci.madv;
+            wl[6].flw = ci.madf;
+            wl[6].ht = $"{lp.statMana}/{lp.statManaMax2}";
+            wl[6].TU();
+            wl[7].ds = !ci.mdv;
+            wl[7].flw = ci.mdf;
+            wl[7].TU();
+            wl[8].TU();
+            wl[9].ds = !ci.rtcv;
+            wl[9].flw = ci.rtcflw;
+            wl[9].TU();
+            wl[10].ds = !ci.sdv;
+            wl[10].flw = ci.sdf;
+            wl[10].TU();
         }
         public override void Unload()
         {
@@ -167,17 +170,28 @@ namespace Widgets
         {
             var pi = ModContent.GetInstance<Positions>();
 
-            pi.ad = ad.cp;
-            pi.blb = blb.cp;
-            pi.ftb = ftb.cp;
-            pi.hb = hb.cp;
-            pi.hd = hd.cp;
-            pi.itb = itb.cp;
-            pi.mad = mad.cp;
-            pi.md = md.cp;
-            pi.pw = pw.cp;
-            pi.rtc = rtc.cp;
-            pi.sd = sd.cp;
+            pi.adx = wl[0].cpx;
+            pi.ady = wl[0].cpy;
+            pi.blbx = wl[1].cpx;
+            pi.blby = wl[1].cpy;
+            pi.ftbx = wl[2].cpx;
+            pi.ftby = wl[2].cpy;
+            pi.hbx = wl[3].cpx;
+            pi.hby = wl[3].cpy;
+            pi.hdx = wl[4].cpx;
+            pi.hdy = wl[4].cpy;
+            pi.itbx = wl[5].cpx;
+            pi.itby = wl[5].cpy;
+            pi.madx = wl[6].cpx;
+            pi.mady = wl[6].cpy;
+            pi.mdx = wl[7].cpx;
+            pi.mdy = wl[7].cpy;
+            pi.pwx = wl[8].cpx;
+            pi.pwy = wl[8].cpy;
+            pi.rtcx = wl[9].cpx;
+            pi.rtcy = wl[9].cpy;
+            pi.sdx = wl[10].cpx;
+            pi.sdy = wl[10].cpy;
         }
         public static float SD(float _, float a) => 0 < a ? _ / a : 0;
     }
