@@ -49,7 +49,7 @@ Shows your current and maximum Amount of Sentries.
 [c/ffff00:Changelog]
 
 [c/c3ffc3:v.1.14]
-- Widgets can't overlap anymore unless moved via the Config.
+- Widgets can't overlap anymore unless moved via the Config
 [c/c3ffc3:v.1.13]
 - Widgets can be moved via the Config again
 - Widgets can't overlap in Positioning Mode anymore (WIP)

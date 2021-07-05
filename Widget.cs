@@ -94,6 +94,7 @@ namespace Widgets
                 r = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(w + x, y, cr.X - x, h))).OrderBy(a => a.x).FirstOrDefault();
                 u = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(x, cr.Y, w, y - cr.Y))).OrderBy(a => a.h + a.y).LastOrDefault();
             }
+            else d = l = r = u = null;
             if (!GetInstance<Config>().blink || md || PW.d.md || PW.l.md || PW.r.md || PW.u.md) MP.bd = MP.blink = 0;
             if (1 > MP.blink) cd = false;
             if (169 < MP.blink) cd = true;
