@@ -7,21 +7,21 @@ namespace Widgets
 {
     class Widget : UIState
     {
-        float x, y;
-        public bool cd, ds, flw, md;
-        public int cpx, cpy;
+        public bool cd, click, drawn, ds, flw, md;
+        public int cx, cy, h, mx, my, w, x, y;
+        public Rectangle cr;
         public string ht;
-        public Vector2 ip, pos, tp;
+        Widget d, l, r, u;
         protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
-            var ci = GetInstance<Config>().bc;
+            var ci = GetInstance<Config>();
 
             if (IsMouseHovering)
             {
-                if (!(md && MP.pm) && GetInstance<Config>().ht) hoverItemName = ht;
+                if (!(md && MP.pm) && ci.ht) hoverItemName = ht;
                 if (MP.pm) LocalPlayer.mouseInterface = true;
             }
-            if (PW.widget == this) sb.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X, (int)tp.Y, (int)Width.Pixels, (int)Height.Pixels), new Color(ci.R * MP.blink / 255, ci.G * MP.blink / 255, ci.B * MP.blink / 255, MP.blink));
+            if (PW.widget == this) sb.Draw(GetTexture("Widgets/sprites/wp"), GetDimensions().ToRectangle(), new Color(ci.bc.R * MP.blink / 255, ci.bc.G * MP.blink / 255, ci.bc.B * MP.blink / 255, MP.blink));
         }
         public Color Gradient(bool rg, Color start, Color end, float rate)
         {
@@ -40,55 +40,67 @@ namespace Widgets
         {
             if (!(PW.d.cm || PW.l.cm || PW.r.cm || PW.u.cm) && MP.pm)
             {
-                md = true;
+                md = Mod0.md = true;
                 PW.widget = this;
             }
-            x = mouseX - Left.Pixels;
-            y = mouseY - Top.Pixels;
+            mx = mouseX - x;
+            my = mouseY - y;
         }
         public override void MouseUp(UIMouseEvent _)
         {
-            md = false;
+            md = Mod0.md = false;
             Mod0.Save();
             Positions.Save();
         }
         public void TU()
         {
-            var iw = Mod0.wl.Where(_ => _ != this && _.GetDimensions().ToRectangle().Intersects(new Rectangle((int)pos.X, (int)pos.Y, (int)Width.Pixels, (int)Height.Pixels)) && _.Width.Pixels > 0).FirstOrDefault();
             var vp = new Vector2(spriteBatch.GraphicsDevice.Viewport.Width, spriteBatch.GraphicsDevice.Viewport.Height);
 
-            if (iw == null) ip = pos;
-            pos = md && PW.widget == this ? new Vector2(mouseX - x, mouseY - y) : !flw || MP.pm ? new Vector2(cpx, cpy) : LocalPlayer.Center - screenPosition + new Vector2(-(vp.X / 2 - cpx), LocalPlayer.gfxOffY - (vp.Y / 2 - cpy));
-            tp = new Vector2((int)((int)(vp.X / UIScale) < pos.X + Width.Pixels ? (int)(vp.X / UIScale) - Width.Pixels : 0 > pos.X ? 0 : iw != null && MP.pm && PW.widget == this ? ip.X + Width.Pixels <= iw.pos.X ? iw.pos.X - Width.Pixels : ip.X >= iw.pos.X + iw.Width.Pixels ? iw.pos.X + iw.Width.Pixels : pos.X : pos.X), (int)((int)(vp.Y / UIScale) < Height.Pixels + pos.Y ? (int)(vp.Y / UIScale) - Height.Pixels : 0 > pos.Y ? 0 : iw != null && MP.pm && PW.widget == this ? Height.Pixels + ip.Y <= iw.pos.Y ? iw.pos.Y - Height.Pixels : ip.Y >= iw.Height.Pixels + iw.pos.Y ? iw.Height.Pixels + iw.pos.Y : pos.Y : pos.Y));
-            Left.Set(tp.X, 0);
-            Top.Set(tp.Y, 0);
             if (MP.pm)
             {
-                cpx = (int)tp.X;
-                cpy = (int)tp.Y;
+                if (Mod0.md)
+                {
+                    cx = x;
+                    cy = y;
+                }
                 if (PW.widget == this)
                 {
-                    if (29 < MP.br)
+                    if (29 < MP.br || click)
                     {
-                        if (PW.d.md) PW.widget.cpy++;
-                        if (PW.l.md) PW.widget.cpx--;
-                        if (PW.r.md) PW.widget.cpx++;
-                        if (PW.u.md) PW.widget.cpy--;
-                        MP.br = 30;
+                        if (29 < MP.br) MP.br = 30;
+                        if (PW.d.md) PW.widget.cy++;
+                        if (PW.l.md) PW.widget.cx--;
+                        if (PW.r.md) PW.widget.cx++;
+                        if (PW.u.md) PW.widget.cy--;
+                        click = false;
                     }
-                    if (cd) MP.blink -= 2;
+                    if (cd) MP.blink -= 1;
                     else if (59 < MP.bd)
                     {
                         MP.bd = 60;
-                        MP.blink += 2;
+                        MP.blink += 1;
                     }
                     if (ds) PW.widget = null;
                     MP.bd++;
                 }
             }
+            h = (int)Height.Pixels;
+            w = (int)Width.Pixels;
+            cr = new Rectangle(md && PW.widget == this ? mouseX - mx : !flw || MP.pm ? cx : (int)(LocalPlayer.Center.X - (vp.X / 2 - cx) - screenPosition.X), md && PW.widget == this ? mouseY - my : !flw || MP.pm ? cy : (int)(LocalPlayer.Center.Y - (vp.Y / 2 - cy) - screenPosition.Y + LocalPlayer.gfxOffY), w, h);
+            if ((!MP.pm && flw || Mod0.md) && drawn)
+            {
+                d = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(x, h + y, w, cr.Y - y))).OrderBy(a => a.y).FirstOrDefault();
+                l = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(cr.X, y, x - cr.X, h))).OrderBy(a => a.w + a.x).LastOrDefault();
+                r = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(w + x, y, cr.X - x, h))).OrderBy(a => a.x).FirstOrDefault();
+                u = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(x, cr.Y, w, y - cr.Y))).OrderBy(a => a.h + a.y).LastOrDefault();
+            }
             if (!GetInstance<Config>().blink || md || PW.d.md || PW.l.md || PW.r.md || PW.u.md) MP.bd = MP.blink = 0;
             if (1 > MP.blink) cd = false;
-            if (99 < MP.blink) cd = true;
+            if (169 < MP.blink) cd = true;
+            Left.Set(cr != GetDimensions().ToRectangle() ? d != l && l != null && l != u ? l.w + l.x : 0 > cr.X ? 0 : d != r && null != r && r != u ? r.x - w : cr.X + w > vp.X / UIScale ? vp.X / UIScale - w : cr.X : cr.X, 0);
+            Top.Set(cr != GetDimensions().ToRectangle() ? d != null ? d.y - h : cr.Y + h > vp.Y / UIScale ? vp.Y / UIScale - h : null != u ? u.h + u.y : 0 > cr.Y ? 0 : cr.Y : cr.Y, 0);
+            x = (int)Left.Pixels;
+            y = (int)Top.Pixels;
         }
     }
 }

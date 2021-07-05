@@ -7,8 +7,6 @@ namespace Widgets
     class PWB : UIElement
     {
         public bool cm, md;
-        public delegate void _();
-        public event _ omd;
         public Texture2D tex;
         protected override void DrawSelf(SpriteBatch sb)
         {
@@ -18,8 +16,7 @@ namespace Widgets
         }
         public override void MouseDown(UIMouseEvent _)
         {
-            if (null != PW.widget) omd();
-            md = Mod0.md = true;
+            if (null != PW.widget) md = Mod0.md = PW.widget.click = true;
             MP.br = 0;
             PlaySound(12);
         }

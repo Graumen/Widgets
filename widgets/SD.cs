@@ -11,8 +11,8 @@ namespace Widgets
             var txt = $"{Main.projectile.Where(_ => _.timeLeft > 0 && _.WipableTurret).Count()}/{Main.LocalPlayer.maxTurrets}";
 
             Height.Set(22, 0);
-            sb.Draw(GetTexture("Widgets/sprites/sdi"), new Vector2(tp.X, tp.Y), Color.White);
-            Utils.DrawBorderString(sb, txt, new Vector2(31 + tp.X, tp.Y), GetInstance<Config>().sdc);
+            sb.Draw(GetTexture("Widgets/sprites/sdi"), new Vector2(x, y), Color.White);
+            Utils.DrawBorderString(sb, txt, new Vector2(31 + x, y), GetInstance<Config>().sdc);
             base.DrawSelf(sb);
             Width.Set(31 + Main.fontMouseText.MeasureString(txt).X, 0);
         }

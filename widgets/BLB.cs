@@ -13,10 +13,10 @@ namespace Widgets
 
             void DrawBar(bool _, Color a, float b, SpriteBatch c, Texture2D d, int e = 0)
             {
-                c.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X + (_ ? 20 : 4), (int)tp.Y + 4 + e, 50, 10), Color.Black);
-                c.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((int)tp.X + (_ ? 20 : 4), (int)tp.Y + 4 + e, (int)b, 10), a);
-                c.Draw(GetTexture("Widgets/sprites/bfg"), new Vector2((_ ? 16 : 0) + tp.X, tp.Y + e), Color.White);
-                if (_) c.Draw(d, new Vector2(tp.X, tp.Y + e), Color.White);
+                c.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((_ ? 20 : 4) + x, 4 + e + y, 50, 10), Color.Black);
+                c.Draw(GetTexture("Widgets/sprites/wp"), new Rectangle((_ ? 20 : 4) + x, 4 + e + y, (int)b, 10), a);
+                c.Draw(GetTexture("Widgets/sprites/bfg"), new Vector2((_ ? 16 : 0) + x, e + y), Color.White);
+                if (_) c.Draw(d, new Vector2(x, e + y), Color.White);
             }
             Height.Set(con ? 34 : 18, 0);
             DrawBar(ci.blbi, Gradient(ci.lbrg, ci.lbsc, ci.lbec, Mod0.SD(lp.lavaTime, lp.lavaMax)), Mod0.SD(50 * lp.lavaTime, lp.lavaMax), sb, GetTexture("Widgets/sprites/bli"), con ? 16 : 0);

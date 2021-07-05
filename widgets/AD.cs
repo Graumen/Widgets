@@ -28,9 +28,9 @@ namespace Widgets
                     break;
                 }
             Height.Set(1 < ca.stack ? 48 : 44, 0);
-            if (0 < bc.A) Utils.DrawInvBG(sb, new Rectangle((int)tp.X, (int)tp.Y, 44, 44), new Color(bc.R * bc.A / 255, bc.G * bc.A / 255, bc.B * bc.A / 255, bc.A));
-            sb.Draw(tex, new Rectangle((int)Round((44 - tex.Width * scale) / 2 + tp.X), (int)Round((44 - tex.Height * scale) / 2 + tp.Y), (int)Round(tex.Width * scale), (int)Round(tex.Height * scale)), Color.White * (0 < ca.type ? 1 : 0.5f));
-            Utils.DrawBorderString(sb, txt, new Vector2(49 + tp.X, tp.Y), rc[ca.rare]);
+            if (0 < bc.A) Utils.DrawInvBG(sb, new Rectangle(x, y, 44, 44), new Color(bc.R * bc.A / 255, bc.G * bc.A / 255, bc.B * bc.A / 255, bc.A));
+            sb.Draw(tex, new Rectangle((int)Round((44 - tex.Width * scale) / 2 + x), (int)Round((44 - tex.Height * scale) / 2 + y), (int)Round(tex.Width * scale), (int)Round(tex.Height * scale)), Color.White * (0 < ca.type ? 1 : 0.5f));
+            Utils.DrawBorderString(sb, txt, new Vector2(x, y), rc[ca.rare]);
             base.DrawSelf(sb);
             Width.Set("" != txt ? 49 + Main.fontMouseText.MeasureString(txt).X : 44, 0);
         }

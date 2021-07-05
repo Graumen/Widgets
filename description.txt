@@ -48,6 +48,8 @@ Shows your current and maximum Amount of Sentries.
 
 [c/ffff00:Changelog]
 
+[c/c3ffc3:v.1.14]
+- Widgets can't overlap anymore unless moved via the Config.
 [c/c3ffc3:v.1.13]
 - Widgets can be moved via the Config again
 - Widgets can't overlap in Positioning Mode anymore (WIP)
@@ -97,5 +99,3 @@ Shows your current and maximum Amount of Sentries.
 - Fixed Flight Time Bar and Invincibility Time Bar not being able to be turned off
 [c/c3ffc3:v.1.9.3.2]
 - Fixed Widgets not working when Visibility is set to "Always"
-[c/c3ffc3:v.1.9.3.1]
-- Custom Sprite for Sentry Display

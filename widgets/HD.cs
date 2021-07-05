@@ -8,10 +8,10 @@ namespace Widgets
         protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
         {
             Height.Set(22, 0);
-            sb.Draw(GetTexture("Widgets/sprites/hdi"), new Vector2(tp.X, tp.Y), Color.White);
-            Utils.DrawBorderString(sb, Mod0.cap + "%", new Vector2(23 + tp.X, tp.Y), GetInstance<Config>().hdc);
+            sb.Draw(GetTexture("Widgets/sprites/hdi"), new Vector2(x, y), Color.White);
+            Utils.DrawBorderString(sb, Mod0.cap + "%", new Vector2(23 + x, y), GetInstance<Config>().hdc);
             base.DrawSelf(sb);
-            Width.Set(23 + Main.fontMouseText.MeasureString(Mod0.cap + "%").X, 0);
+            Width.Set(59, 0);
         }
     }
 }
