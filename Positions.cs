@@ -142,6 +142,7 @@ namespace Widgets
             var save = typeof(ConfigManager).GetMethod("Save", BindingFlags.NonPublic | BindingFlags.Static);
 
             if (null != save) save.Invoke(null, new object[] { Terraria.ModLoader.ModContent.GetInstance<Positions>() });
+            Mod0.md = false;
         }
     }
 }

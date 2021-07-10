@@ -22,7 +22,7 @@ Shows your current and maximum Amount of Buffs to the Right of your newest Buff.
 Shows your Flight Time as a Bar and your Extra Jumps as a Number. The Bar also works with Jumps, most Mounts, Rocket Boots, and the Flying Carpet.
 
 [i:28] [c/c3ffc3:Heal Display]
-Shows how much of the Heal of your best Healing Item you will get when using it or Quick Heal, as a Percentage. Only visible when a Healing Item can be used and the Percentage is >= the Percentage in the Config.
+Shows how much of the Heal of your best Healing Item you would get as a Percentage. Only visible when a Healing Item can be used and the Percentage is >= the Percentage in the Config.
 
 [i:29] [c/c3ffc3:Health Bar]
 Represents your Health. You can choose at what Percentage it appears.

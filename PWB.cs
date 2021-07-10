@@ -22,7 +22,7 @@ namespace Widgets
         }
         public override void MouseUp(UIMouseEvent _)
         {
-            md = Mod0.md = false;
+            md = false;
             Mod0.Save();
             Positions.Save();
         }

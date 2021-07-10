@@ -14,6 +14,11 @@ namespace Widgets
         UserInterface adui = new UserInterface(), blbui = new UserInterface(), ftbui = new UserInterface(), hbui = new UserInterface(), hdui = new UserInterface(), hv = new UserInterface(), itbui = new UserInterface(), madui = new UserInterface(), mdui = new UserInterface(), pwui = new UserInterface(), rtcui = new UserInterface(), sdui = new UserInterface();
         public override void Load()
         {
+            foreach (var _ in wl)
+            {
+                _.Height.Set(0, 0);
+                _.Width.Set(0, 0);
+            }
             adui.SetState(wl[0]);
             blbui.SetState(wl[1]);
             ftbui.SetState(wl[2]);
@@ -225,28 +230,28 @@ namespace Widgets
         {
             var pi = ModContent.GetInstance<Positions>();
 
-            pi.adx = wl[0].cx;
-            pi.ady = wl[0].cy;
-            pi.blbx = wl[1].cx;
-            pi.blby = wl[1].cy;
-            pi.ftbx = wl[2].cx;
-            pi.ftby = wl[2].cy;
-            pi.hbx = wl[3].cx;
-            pi.hby = wl[3].cy;
-            pi.hdx = wl[4].cx;
-            pi.hdy = wl[4].cy;
-            pi.itbx = wl[5].cx;
-            pi.itby = wl[5].cy;
-            pi.madx = wl[6].cx;
-            pi.mady = wl[6].cy;
-            pi.mdx = wl[7].cx;
-            pi.mdy = wl[7].cy;
-            pi.pwx = wl[8].cx;
-            pi.pwy = wl[8].cy;
-            pi.rtcx = wl[9].cx;
-            pi.rtcy = wl[9].cy;
-            pi.sdx = wl[10].cx;
-            pi.sdy = wl[10].cy;
+            pi.adx = wl[0].x;
+            pi.ady = wl[0].y;
+            pi.blbx = wl[1].x;
+            pi.blby = wl[1].y;
+            pi.ftbx = wl[2].x;
+            pi.ftby = wl[2].y;
+            pi.hbx = wl[3].x;
+            pi.hby = wl[3].y;
+            pi.hdx = wl[4].x;
+            pi.hdy = wl[4].y;
+            pi.itbx = wl[5].x;
+            pi.itby = wl[5].y;
+            pi.madx = wl[6].x;
+            pi.mady = wl[6].y;
+            pi.mdx = wl[7].x;
+            pi.mdy = wl[7].y;
+            pi.pwx = wl[8].x;
+            pi.pwy = wl[8].y;
+            pi.rtcx = wl[9].x;
+            pi.rtcy = wl[9].y;
+            pi.sdx = wl[10].x;
+            pi.sdy = wl[10].y;
         }
         public static float SD(float _, float a) => 0 < a ? _ / a : 0;
     }

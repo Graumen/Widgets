@@ -9,7 +9,6 @@ namespace Widgets
     {
         public bool cd, click, drawn, ds, flw, md;
         public int cx, cy, h, mx, my, w, x, y;
-        public Rectangle cr;
         public string ht;
         Widget d, l, r, u;
         protected override void DrawSelf(Microsoft.Xna.Framework.Graphics.SpriteBatch sb)
@@ -48,21 +47,20 @@ namespace Widgets
         }
         public override void MouseUp(UIMouseEvent _)
         {
-            md = Mod0.md = false;
+            md = false;
             Mod0.Save();
             Positions.Save();
         }
         public void TU()
         {
+            h = (int)Height.Pixels;
+            w = (int)Width.Pixels;
+
             var vp = new Vector2(spriteBatch.GraphicsDevice.Viewport.Width, spriteBatch.GraphicsDevice.Viewport.Height);
+            var cr = new Rectangle(md && PW.widget == this ? mouseX - mx : !flw || MP.pm ? cx : (int)(LocalPlayer.Center.X - (vp.X / 2 - cx) - screenPosition.X), md && PW.widget == this ? mouseY - my : !flw || MP.pm ? cy : (int)(LocalPlayer.Center.Y - (vp.Y / 2 - cy) - screenPosition.Y + LocalPlayer.gfxOffY), w, h);
 
             if (MP.pm)
             {
-                if (Mod0.md)
-                {
-                    cx = x;
-                    cy = y;
-                }
                 if (PW.widget == this)
                 {
                     if (29 < MP.br || click)
@@ -84,22 +82,19 @@ namespace Widgets
                     MP.bd++;
                 }
             }
-            h = (int)Height.Pixels;
-            w = (int)Width.Pixels;
-            cr = new Rectangle(md && PW.widget == this ? mouseX - mx : !flw || MP.pm ? cx : (int)(LocalPlayer.Center.X - (vp.X / 2 - cx) - screenPosition.X), md && PW.widget == this ? mouseY - my : !flw || MP.pm ? cy : (int)(LocalPlayer.Center.Y - (vp.Y / 2 - cy) - screenPosition.Y + LocalPlayer.gfxOffY), w, h);
-            if ((!MP.pm && flw || Mod0.md) && drawn)
+            if ((!MP.pm && flw || Mod0.md && PW.widget == this) && drawn)
             {
-                d = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(x, h + y, w, cr.Y - y))).OrderBy(a => a.y).FirstOrDefault();
-                l = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(cr.X, y, x - cr.X, h))).OrderBy(a => a.w + a.x).LastOrDefault();
-                r = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(w + x, y, cr.X - x, h))).OrderBy(a => a.x).FirstOrDefault();
-                u = Mod0.wl.Where(_ => _.drawn && _.GetDimensions().ToRectangle().Intersects(new Rectangle(x, cr.Y, w, y - cr.Y))).OrderBy(a => a.h + a.y).LastOrDefault();
+                d = Mod0.wl.Where(_ => _ != this && _.GetDimensions().ToRectangle().Intersects(new Rectangle(x, h + y, w, cr.Y - y))).OrderBy(a => a.y).FirstOrDefault();
+                l = Mod0.wl.Where(_ => _ != this && _.GetDimensions().ToRectangle().Intersects(new Rectangle(cr.X, y, x - cr.X, h))).OrderBy(a => a.w + a.x).LastOrDefault();
+                r = Mod0.wl.Where(_ => _ != this && _.GetDimensions().ToRectangle().Intersects(new Rectangle(w + x, y, cr.X - x, h))).OrderBy(a => a.x).FirstOrDefault();
+                u = Mod0.wl.Where(_ => _ != this && _.GetDimensions().ToRectangle().Intersects(new Rectangle(x, cr.Y, w, y - cr.Y))).OrderBy(a => a.h + a.y).LastOrDefault();
             }
             else d = l = r = u = null;
             if (!GetInstance<Config>().blink || md || PW.d.md || PW.l.md || PW.r.md || PW.u.md) MP.bd = MP.blink = 0;
             if (1 > MP.blink) cd = false;
             if (169 < MP.blink) cd = true;
-            Left.Set(cr != GetDimensions().ToRectangle() ? d != l && l != null && l != u ? l.w + l.x : 0 > cr.X ? 0 : d != r && null != r && r != u ? r.x - w : cr.X + w > vp.X / UIScale ? vp.X / UIScale - w : cr.X : cr.X, 0);
-            Top.Set(cr != GetDimensions().ToRectangle() ? d != null ? d.y - h : cr.Y + h > vp.Y / UIScale ? vp.Y / UIScale - h : null != u ? u.h + u.y : 0 > cr.Y ? 0 : cr.Y : cr.Y, 0);
+            Left.Set(d != l && l != null && l != u ? l.w + l.x : 0 > cr.X ? 0 : d != r && null != r && r != u ? r.x - w : cr.X + w > vp.X / UIScale ? vp.X / UIScale - w : cr.X, 0);
+            Top.Set(d != null ? d.y - h : cr.Y + h > vp.Y / UIScale ? vp.Y / UIScale - h : null != u ? u.h + u.y : 0 > cr.Y ? 0 : cr.Y, 0);
             x = (int)Left.Pixels;
             y = (int)Top.Pixels;
         }
